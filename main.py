@@ -2,6 +2,8 @@ from doctest import FAIL_FAST
 import json
 from moviepy.editor import *
 import os.path
+from images_generator.image_generator import generate_images
+import time
 
 def testar_json():
   erros = ''
@@ -30,24 +32,22 @@ def testar_json():
   print(erros)
   return(True if erros == '' else False)
  
-def generate_images():
-  print("To do")
-  
 def generate_video():
+  start_time = time.time()
   if(testar_json() == True):
     clips = []
-    time = 0
+    time_video = 0
     with open('json_example.json', 'r') as j:
       songs = json.load(j)
     for i in songs:
       start = songs[i]["cut_time"][0]
       end = songs[i]["cut_time"][1]
-      image = ImageClip(songs[i]["image_path"]).resize((1920,1080)).set_duration(end-start).set_start(time).fx(vfx.fadein,1).fx(vfx.fadeout,1)
-      clip = VideoFileClip(songs[i]["video_path"]).resize((1280,720)).set_position((50,88)).subclip(start,end).set_start(time).fx(vfx.fadein,1).fx(vfx.fadeout,1)
+      image = ImageClip(songs[i]["image_path"]).resize((1920,1080)).set_duration(end-start).set_start(time_video).fx(vfx.fadein,1).fx(vfx.fadeout,1)
+      clip = VideoFileClip(songs[i]["video_path"]).resize((1280,720)).set_position((50,88)).subclip(start,end).set_start(time_video).fx(vfx.fadein,1).fx(vfx.fadeout,1)
 
       clips.append(image)
       clips.append(clip)
-      time = time+(end-start)
+      time_video = time_video+(end-start)
 
     final_clip = CompositeVideoClip(clips)
     final_clip.write_videofile('./videos/teste.webm',codec='libvpx-vp9',
@@ -56,6 +56,7 @@ def generate_video():
                           '-tile-columns', '6', '-frame-parallel', '0',
                           '-auto-alt-ref', '1', '-lag-in-frames', '25', '-g',
                           '128', '-pix_fmt', 'yuv420p', '-row-mt', '1'])
+    print("--- %s seconds ---" % (time.time() - start_time))
     return
   print("O JSON não passou no teste. Use a opção 3 (Testar JSON) para mais informações.")
   
