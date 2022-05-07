@@ -1,0 +1,34 @@
+{
+    "participants": [
+        "dizzy",
+        "corean",
+        "foerster",
+        "piruzinho",
+        "yuuzinho",
+        "serra",
+        "bara",
+        "procci",
+        "",
+        "",
+        ""
+
+    ],
+    "series": {
+        "Vaundy - Hadaka no Yuusha": {
+			"anime": "Ousama Ranking",
+			"song": "Vaundy - Hadaka no Yuusha",
+			"popularity": "1",
+			"note1": "6.0",
+			"note2": "9.0",
+			"note3": "8.0",
+			"note4": "8.0",
+			"note5": "8.5",
+			"note6": "10",
+			"note7": "9.0",
+			"note8": "8.5",
+			"average": 8.375,
+			"cover": "1.jpg"
+        }
+		
+    }
+}

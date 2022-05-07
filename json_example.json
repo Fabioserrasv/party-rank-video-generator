@@ -1,0 +1,12 @@
+{
+  "Example 1": {
+    "image_path": "images/1.png",
+    "video_path": "videos/1.webm",
+    "cut_time": [20, 23]
+  },
+  "Example 2": {
+    "image_path": "images/2.png",
+    "video_path": "videos/2.webm",
+    "cut_time": [20, 23]
+  }
+}
