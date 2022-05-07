@@ -9,7 +9,7 @@ import string
 import requests
 import urllib
 
-if os.path.exists("thumbnails") == False:
+if os.path.exists("./images_generator/thumbnails") == False:
     with open('series.txt','r') as f:
         thing = f.read().splitlines()
     with open('series.json','r') as f:
@@ -47,14 +47,15 @@ if os.path.exists("thumbnails") == False:
         open(f"thumbnails/{filename}".format("cover_"),'wb').write(image.content)
         print("finished {}".format(song))
 
-    with open('series2.json','w') as f:
+    with open('./images_generator/series2.json','w') as f:
         json.dump(series,f,indent=4)
 else:
-    with open('series2.json','r') as f:
+    with open('./images_generator/series2.json','r') as f:
         series = json.load(f)
 
 sorted_series_names = sorted(series['series'], key=lambda x:(series['series'][x]['anime']), reverse=False)
 sorted_series = series
+title = series["title"]
 series = {}
 series['series'] = {}
 series['participants'] = sorted_series['participants']
@@ -70,8 +71,8 @@ for song in sorted_series_names:
     
 size = 1920,1080
 place = 1
-font = 'Raleway-Light.ttf'
-font2 = 'Raleway-SemiBold.ttf'
+font = './images_generator/Raleway-Light.ttf'
+font2 = './images_generator/Raleway-SemiBold.ttf'
 for song in series["series"]:
     image = Image.new('RGBA', size, color ='#00000000')
     text = ImageDraw.Draw(image)
@@ -88,10 +89,10 @@ for song in series["series"]:
     
     aa = series["series"][song]["song"]
     print(str(aa.encode('utf-8')))
-    
+
     text.text((195,1029),series['series'][song]['anime'], fill=(255,255,255), font=font482, anchor='lm') #anime name
     text.text((195,960),series["series"][song]["song"], fill=(255,244,79), font=font482, anchor='lm') # song name
-    text.text((51,50),"Winter 2022 Anime Openings", fill=(255,255,255), font=font242, anchor='ld')
+    text.text((51,50),title, fill=(255,255,255), font=font242, anchor='ld')
 
     avg = round(series["series"][song]["average"],3)
     show_avg = round(series["series"][song]["average"],2)
@@ -110,7 +111,7 @@ for song in series["series"]:
     text.text((1661+random_number2,70+190+random_number),series["participants"][0], fill=colors[0], font=font242, anchor='mm')
     text.text((1661+random_number2,70+25+190+random_number),series["series"][song]["note1"], fill=colors_note[0], font=font242, anchor='mm')
 
-    par1Img = Image.open("./participants_images/{}.png".format(series["participants"][0]))
+    par1Img = Image.open("./images_generator/participants_images/{}.png".format(series["participants"][0]))
     par1Img = par1Img.convert('RGB')
     par1Img = par1Img.resize((128,128), Image.Resampling.LANCZOS)
     par1Img = ImageOps.expand(par1Img, border=border, fill="#ffffff")
@@ -120,7 +121,7 @@ for song in series["series"]:
     text.text((1661+random_number2,70+190+190+random_number),series["participants"][1], fill=colors[1], font=font242, anchor='mm')
     text.text((1661+random_number2,70+25+190+190+random_number),series["series"][song]["note2"], fill=colors_note[1], font=font242, anchor='mm')
     
-    par2Img = Image.open("./participants_images/{}.png".format(series["participants"][1]))
+    par2Img = Image.open("./images_generator/participants_images/{}.png".format(series["participants"][1]))
     par2Img = par2Img.convert('RGB')
     par2Img = par2Img.resize((128,128), Image.Resampling.LANCZOS)
     par2Img = ImageOps.expand(par2Img, border=border, fill="#ffffff")
@@ -129,7 +130,7 @@ for song in series["series"]:
     text.text((1661+random_number2,70+190+190+190+random_number),series["participants"][2], fill=colors[2], font=font242, anchor='mm')
     text.text((1661+random_number2,70+25+190+190+190+random_number),series["series"][song]["note3"], fill=colors_note[2], font=font242, anchor='mm')
     
-    par3Img = Image.open("./participants_images/{}.png".format(series["participants"][2]))
+    par3Img = Image.open("./images_generator/participants_images/{}.png".format(series["participants"][2]))
     par3Img = par3Img.convert('RGB')
     par3Img = par3Img.resize((128,128), Image.Resampling.LANCZOS)
     par3Img = ImageOps.expand(par3Img, border=border, fill="#ffffff")
@@ -138,7 +139,7 @@ for song in series["series"]:
     text.text((1661+random_number2,70+190+190+190+190+random_number),series["participants"][3], fill=colors[3], font=font242, anchor='mm')
     text.text((1661+random_number2,70+25+190+190+190+190+random_number),series["series"][song]["note4"], fill=colors_note[3], font=font242, anchor='mm')
     
-    par4Img = Image.open("./participants_images/{}.png".format(series["participants"][3]))
+    par4Img = Image.open("./images_generator/participants_images/{}.png".format(series["participants"][3]))
     par4Img = par4Img.convert('RGB')
     par4Img = par4Img.resize((128,128), Image.Resampling.LANCZOS)
     par4Img = ImageOps.expand(par4Img, border=border, fill="#ffffff")
@@ -147,7 +148,7 @@ for song in series["series"]:
     text.text((1503+random_number2,70+190+random_number),series["participants"][4], fill=colors[4], font=font242, anchor='mm')
     text.text((1503+random_number2,70+25+190+random_number),series["series"][song]["note5"], fill=colors_note[4], font=font242, anchor='mm')
     
-    par5Img = Image.open("./participants_images/{}.png".format(series["participants"][4]))
+    par5Img = Image.open("./images_generator/participants_images/{}.png".format(series["participants"][4]))
     par5Img = par5Img.convert('RGB')
     par5Img = par5Img.resize((128,128), Image.Resampling.LANCZOS)
     par5Img = ImageOps.expand(par5Img, border=border, fill="#ffffff")
@@ -156,7 +157,7 @@ for song in series["series"]:
     text.text((1503+random_number2,70+190+190+random_number),series["participants"][5], fill=colors[5], font=font242, anchor='mm')
     text.text((1503+random_number2,70+25+190+190+random_number),series["series"][song]["note6"], fill=colors_note[5], font=font242, anchor='mm')
     
-    par6Img = Image.open("./participants_images/{}.png".format(series["participants"][5]))
+    par6Img = Image.open("./images_generator/participants_images/{}.png".format(series["participants"][5]))
     par6Img = par6Img.convert('RGB')
     par6Img = par6Img.resize((128,128), Image.Resampling.LANCZOS)
     par6Img = ImageOps.expand(par6Img, border=border, fill="#ffffff")
@@ -166,7 +167,7 @@ for song in series["series"]:
     text.text((1503+random_number2,70+190+190+190+random_number),series["participants"][6], fill=colors[6], font=font242, anchor='mm')
     text.text((1503+random_number2,70+25+190+190+190+random_number),series["series"][song]["note7"], fill=colors_note[6], font=font242, anchor='mm')
     
-    par7Img = Image.open("./participants_images/{}.png".format(series["participants"][5]))
+    par7Img = Image.open("./images_generator/participants_images/{}.png".format(series["participants"][5]))
     par7Img = par7Img.convert('RGB')
     par7Img = par7Img.resize((128,128), Image.Resampling.LANCZOS)
     par7Img = ImageOps.expand(par7Img, border=border, fill="#ffffff")
@@ -175,15 +176,15 @@ for song in series["series"]:
     text.text((1503+random_number2,70+190+190+190+190+random_number),series["participants"][7], fill=colors[7], font=font242, anchor='mm')
     text.text((1503+random_number2,70+25+190+190+190+190+random_number),series["series"][song]["note8"], fill=colors_note[7], font=font242, anchor='mm')
 
-    par8Img = Image.open("./participants_images/{}.png".format(series["participants"][6]))
+    par8Img = Image.open("./images_generator/participants_images/{}.png".format(series["participants"][6]))
     par8Img = par8Img.convert('RGB')
     par8Img = par8Img.resize((128,128), Image.Resampling.LANCZOS)
     par8Img = ImageOps.expand(par8Img, border=border, fill="#ffffff")
     image.paste(par8Img, (1503-14, 70+190+190+190+190+random_number-142))
 
-    cover = Image.open("./thumbnails/{}".format(series["series"][song]["cover"]))
+    cover = Image.open("./images_generator//thumbnails/{}".format(series["series"][song]["cover"]))
     cover = cover.convert('RGB')
     cover = cover.resize((131,184), Image.Resampling.LANCZOS)
     image.paste(cover,(50,873))
-    image.save(f"out/{place}.png")
+    image.save(f"./images_generator/out/{place}.png")
     place+=1
