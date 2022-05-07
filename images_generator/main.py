@@ -98,7 +98,7 @@ for song in series["series"]:
     text.text((113,839),str(place), fill=(255,255,255), font=font60, anchor='mm')
     colors = [(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255)]
     colors_note = [(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255)]
-    average_note = (255,255,255)
+    average_note = (24,249,248)
 
     soma2 = float(series['series'][song]['note1'])+float(series['series'][song]['note2'])+float(series['series'][song]['note3'])+float(series['series'][song]['note4'])+float(series['series'][song]['note5'])+float(series['series'][song]['note6'])+float(series['series'][song]['note7'])+float(series['series'][song]['note8'])
     random_number = -30

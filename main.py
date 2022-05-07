@@ -42,8 +42,8 @@ def generate_video():
     for i in songs:
       start = songs[i]["cut_time"][0]
       end = songs[i]["cut_time"][1]
-      image = ImageClip(songs[i]["image_path"]).set_duration(end-start).set_start(time).fx(vfx.fadein,1).fx(vfx.fadeout,1)
-      clip = VideoFileClip(songs[i]["video_path"]).resize((1280,720)).set_position((34,54)).subclip(start,end).set_start(time).fx(vfx.fadein,1).fx(vfx.fadeout,1)
+      image = ImageClip(songs[i]["image_path"]).resize((1920,1080)).set_duration(end-start).set_start(time).fx(vfx.fadein,1).fx(vfx.fadeout,1)
+      clip = VideoFileClip(songs[i]["video_path"]).resize((1280,720)).set_position((50,88)).subclip(start,end).set_start(time).fx(vfx.fadein,1).fx(vfx.fadeout,1)
 
       clips.append(image)
       clips.append(clip)
