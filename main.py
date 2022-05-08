@@ -1,13 +1,20 @@
-from doctest import FAIL_FAST
 import json
 from moviepy.editor import *
 import os.path
 from images_generator.image_generator import generate_images
 import time
 
+google = False
+
+VIDEO_PATH = "./videos/teste.wmv"
+JSON_PATH = "json_example.json"
+if(google == True):
+  VIDEO_PATH = "/content/drive/MyDrive/output_party_rank/teste.webm"
+  JSON_PATH = "/content/party-rank-video-generator/json_example.json"
+
 def testar_json():
   erros = ''
-  with open('json_example.json', 'r') as j:
+  with open(JSON_PATH, 'r') as j:
     songs = json.load(j)
   for i in songs:
     t = 0
@@ -37,7 +44,7 @@ def generate_video():
   if(testar_json() == True):
     clips = []
     time_video = 0
-    with open('json_example.json', 'r') as j:
+    with open(JSON_PATH, 'r') as j:
       songs = json.load(j)
     for i in songs:
       start = songs[i]["cut_time"][0]
@@ -50,8 +57,8 @@ def generate_video():
       time_video = time_video+(end-start)
 
     final_clip = CompositeVideoClip(clips)
-    final_clip.write_videofile('./videos/teste.webm',codec='libvpx-vp9',
-                      threads='8', bitrate='1485k',
+    final_clip.write_videofile(VIDEO_PATH, codec='mpeg4',
+                      threads='4', bitrate='1485k',
                       ffmpeg_params=[
                           '-tile-columns', '6', '-frame-parallel', '0',
                           '-auto-alt-ref', '1', '-lag-in-frames', '25', '-g',
