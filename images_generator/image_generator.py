@@ -47,6 +47,7 @@ def generate_images():
         
     size = 1920,1080
     place = len(series["series"])
+    count = 1
     font = RALEWAY_LIGHT_PATH
     font2 = RALEWAY_SEMI_PATH
     for song in series["series"]:
@@ -70,9 +71,7 @@ def generate_images():
         text.text((195,960),series["series"][song]["song"], fill=(255,244,79), font=font482, anchor='lm') # song name
         text.text((51,50),title, fill=(255,255,255), font=font242, anchor='ld')
 
-        avg = round(series["series"][song]["average"],3)
-        show_avg = round(series["series"][song]["average"],2)
-        text.text((113,839),str(place), fill=(255,255,255), font=font60, anchor='mm')
+        text.text((113,839),str(count), fill=(255,255,255), font=font60, anchor='mm')
         colors = [(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255)]
         colors_note = [(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255)]
         average_note = (24,249,248)
@@ -164,3 +163,4 @@ def generate_images():
         image.paste(cover,(50,873))
         image.save(f"{SAVE_PATH}/{place}.png")
         place -= 1
+        count += 1
