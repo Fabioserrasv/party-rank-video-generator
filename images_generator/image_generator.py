@@ -69,7 +69,7 @@ def generate_images():
 
         text.text((195,1029),series['series'][song]['anime'], fill=(255,255,255), font=font482, anchor='lm') #anime name
         text.text((195,960),series["series"][song]["song"], fill=(255,244,79), font=font482, anchor='lm') # song name
-        text.text((51,50),title, fill=(255,255,255), font=font242, anchor='ld')
+        text.text((51,80),title, fill=(255,255,255), font=font242, anchor='ld')
 
         text.text((113,839),str(count), fill=(255,255,255), font=font60, anchor='mm')
         colors = [(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255)]
