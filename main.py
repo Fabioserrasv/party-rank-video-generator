@@ -4,12 +4,12 @@ import os.path
 from images_generator.image_generator import generate_images
 import time
 
-google = False
+google = True
 
-VIDEO_PATH = "./videos/teste.wmv"
+VIDEO_PATH = "./videos/nome_do_video.wmv"
 JSON_PATH = "json_example.json"
 if(google == True):
-  VIDEO_PATH = "/content/drive/MyDrive/output_party_rank/teste.webm"
+  VIDEO_PATH = "/content/drive/MyDrive/output_party_rank/nome_do_video.wmv"
   JSON_PATH = "/content/party-rank-video-generator/json_example.json"
 
 def testar_json():
@@ -58,7 +58,7 @@ def generate_video():
 
     final_clip = CompositeVideoClip(clips)
     final_clip.write_videofile(VIDEO_PATH, codec='mpeg4',
-                      threads='4', bitrate='1485k',
+                      threads='4', bitrate='6305k',
                       ffmpeg_params=[
                           '-tile-columns', '6', '-frame-parallel', '0',
                           '-auto-alt-ref', '1', '-lag-in-frames', '25', '-g',

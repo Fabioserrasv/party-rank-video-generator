@@ -9,7 +9,7 @@ import string
 import requests
 import urllib
 
-google = False
+google = True
 
 THUMBNAIL_PATH = "./images_generator/thumbnails"
 JSON_PATH = "./images_generator/series2.json"
