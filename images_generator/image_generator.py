@@ -4,7 +4,6 @@ import os
 import sys
 import math
 import re
-import random
 import string
 import requests
 import urllib
