@@ -49,6 +49,10 @@ def generate_images():
     count = 1
     font = RALEWAY_LIGHT_PATH
     font2 = RALEWAY_SEMI_PATH
+
+    clear_null = list(filter(None, series['participants'])) # removendo participantes null
+    clear_null = len(set(clear_null)) # numero de participantes nao-null
+
     for song in series["series"]:
         image = Image.new('RGBA', size, color ='#00000000')
         text = ImageDraw.Draw(image)
@@ -80,7 +84,7 @@ def generate_images():
         random_number2 = 51
         border = (2, 2, 2, 2)
         
-        text.text((1600,62),"Average: {}".format(round(soma2/8, 2)), fill=average_note, font=font36, anchor='mm')
+        text.text((1600,62),"Average: {}".format(round(soma2/clear_null, 2)), fill=average_note, font=font36, anchor='mm')
         #1
         text.text((1661+random_number2,70+190+random_number),series["participants"][0], fill=colors[0], font=font242, anchor='mm')
         text.text((1661+random_number2,70+25+190+random_number),series["series"][song]["notes"][0], fill=colors_note[0], font=font242, anchor='mm')
