@@ -78,13 +78,13 @@ def generate_images():
         colors_note = [(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255),(255,255,255)]
         average_note = (24,249,248)
 
-        soma2 = float(series['series'][song]['notes'][0])+float(series['series'][song]['notes'][1])+float(series['series'][song]['notes'][2])+float(series['series'][song]['notes'][3])+float(series['series'][song]['notes'][4])+float(series['series'][song]['notes'][5])+float(series['series'][song]['notes'][6])+float(series['series'][song]['notes'][7])
+        soma = float(series['series'][song]['notes'][0])+float(series['series'][song]['notes'][1])+float(series['series'][song]['notes'][2])+float(series['series'][song]['notes'][3])+float(series['series'][song]['notes'][4])+float(series['series'][song]['notes'][5])+float(series['series'][song]['notes'][6])+float(series['series'][song]['notes'][7])
    
         random_number = -30
         random_number2 = 51
         border = (2, 2, 2, 2)
         
-        text.text((1600,62),"Average: {}".format(round(soma2/clear_null, 2)), fill=average_note, font=font36, anchor='mm')
+        text.text((1600,62),"Average: {}".format(round(soma/clear_null, 2)), fill=average_note, font=font36, anchor='mm')
         #1
         text.text((1661+random_number2,70+190+random_number),series["participants"][0], fill=colors[0], font=font242, anchor='mm')
         text.text((1661+random_number2,70+25+190+random_number),series["series"][song]["notes"][0], fill=colors_note[0], font=font242, anchor='mm')
