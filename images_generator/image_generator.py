@@ -64,8 +64,7 @@ def generate_images():
         font242 = ImageFont.truetype(font2, 24)
         font222 = ImageFont.truetype(font2, 22)
         
-        aa = series["series"][song]["song"]
-        print(str(aa.encode('utf-8')))
+        print(str(series["series"][song]["song"].encode('utf-8')))
 
         text.text((195,1029),series['series'][song]['anime'], fill=(255,255,255), font=font482, anchor='lm') #anime name
         text.text((195,960),series["series"][song]["song"], fill=(255,244,79), font=font482, anchor='lm') # song name
