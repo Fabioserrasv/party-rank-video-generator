@@ -102,6 +102,8 @@ def generate_images():
             7: (1503-14, 70+190+190+190+190+random_number-142)
         }
         
+        text.rectangle(((49, 87), (1330, 808)), outline ="white") # el retangulo
+
         menor = -1
         maior = -1
         m = -1
