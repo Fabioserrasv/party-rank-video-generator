@@ -5,9 +5,9 @@ Usar no Google Colab
 
 Criar Pastas:
 ```bash
--videos_party_rank
--output_party_rank
--images_party_rank
+%mkdir videos_party_rank
+%mkdir output_party_rank
+%mkdir images_party_rank
 ```
 
 Executar:
