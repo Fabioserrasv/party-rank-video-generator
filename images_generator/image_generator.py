@@ -1,4 +1,3 @@
-import imp
 import json
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
