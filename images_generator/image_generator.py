@@ -2,7 +2,7 @@ import imp
 import json
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
-google = False
+google = True
 
 THUMBNAIL_PATH = "./images_generator/thumbnails"
 JSON_PATH = "./images_generator/series2.json"
