@@ -82,7 +82,7 @@ def generate_images():
         px_nick, px_note, px_image = getPixels(clear_null)
 
         text.rectangle(((49, 87), (1330, 808)),
-                       outline="blue")  # el retangulo
+                       outline="white")  # el retangulo
 
         menor = -1
         maior = -1
