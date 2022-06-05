@@ -1,31 +1,302 @@
 {
-  "title": "Shingeki no Kyojin All Songs",
-  "participants": [
-    "foerster",
-    "nephyle",
-    "serra",
-    "stardust",
-    "antarc",
-    "sora",
-    "procci"
-  ],
+  "title": "Code Geass All Songs",
+  "participants": ["serra", "dizzy", "michael", "sora", "nephyle", "mac", "stardust", "foerster"],
   "series": {
-    "cinema staff - great escape": {
-      "anime": "Shingeki no Kyojin", 
-      "song": "cinema staff - great escape", 
+    "ALI PROJECT - Utsukushiki Kemono-tachi no Tame no": {
       "type": "Insert",
-      "notes": ["10","10","10","4","5","6","7","8"],
-      "average": 8,
+      "anime": " Fukkatsu no Lelouch",
+      "song": "ALI PROJECT - Utsukushiki Kemono-tachi no Tame no",
+      "notes": ["6.82", "4.00", "7.50", "2.00", "4.60", "6.75", "2.00", "6.00"],
+      "average": 4.95875,
       "cover": "1.jpg"
-      },
-      
-      "Linked Horizon - Akatsuki no Requiem": {
-      "anime": "Shingeki no Kyojin Season 3", 
-      "song": "Linked Horizon - Akatsuki no Requiem",
-      "type": "Opening", 
-      "notes": ["1","2","3","4","5","6","7","8"],
-      "average": 1,
+    },
+    "UNIONE - Revive": {
+      "type": "Ending",
+      "anime": " Fukkatsu no Lelouch",
+      "song": "UNIONE - Revive",
+      "notes": ["6.80", "7.00", "5.00", "1.00", "2.00", "6.25", "4.30", "7.50"],
+      "average": 4.98125,
       "cover": "1.jpg"
-      }
+    },
+    "Leo Ieiri - Kono Sekai de": {
+      "type": "Opening",
+      "anime": " Fukkatsu no Lelouch",
+      "song": "Leo Ieiri - Kono Sekai de",
+      "notes": ["6.90", "6.00", "6.50", "2.00", "5.00", "7.50", "4.10", "9.50"],
+      "average": 5.9375,
+      "cover": "1.jpg"
+    },
+    "Maaya Sakamoto - Arco": {
+      "type": "Ending",
+      "anime": " Boukoku no Akito",
+      "song": "Maaya Sakamoto - Arco",
+      "notes": ["7.00", "6.50", "3.00", "1.50", "0.30", "6.17", "3.50", "8.00"],
+      "average": 4.49625,
+      "cover": "1.jpg"
+    },
+    "Maaya Sakamoto - More Than Words": {
+      "type": "Ending",
+      "anime": " Boukoku no Akito",
+      "song": "Maaya Sakamoto - More Than Words",
+      "notes": ["7.00", "6.20", "4.00", "4.00", "2.50", "6.00", "2.50", "7.50"],
+      "average": 4.9625,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Continued Story": {
+      "type": "Ending",
+      "anime": "Code Geass: Hangyaku no Lelouch R2 Special Edition - Zero Requiem",
+      "song": "Hitomi - Continued Story",
+      "notes": ["6.70", "4.00", "9.00", "3.50", "3.60", "6.00", "3.33", "5.00"],
+      "average": 5.14125,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Sensibility": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Hitomi - Sensibility",
+      "notes": ["6.00", "4.30", "4.00", "1.50", "1.00", "6.50", "0.21", "7.00"],
+      "average": 3.81375,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Stories": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Hitomi - Stories",
+      "notes": ["7.50", "4.00", "8.00", "5.00", "5.70", "6.33", "5.20", "9.00"],
+      "average": 6.34125,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Masquerade": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Hitomi - Masquerade",
+      "notes": ["6.60", "4.80", "4.00", "3.00", "1.80", "5.75", "3.20", "8.70"],
+      "average": 4.73125,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Lullaby of M": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Hitomi - Lullaby of M",
+      "notes": ["6.80", "4.00", "7.00", "2.00", "2.20", "5.75", "3.40", "5.50"],
+      "average": 4.58125,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Innocent Days": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Hitomi - Innocent Days",
+      "notes": ["7.90", "3.00", "8.00", "2.00", "2.75", "5.74", "3.11", "8.00"],
+      "average": 5.0625,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Alone": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Hitomi - Alone",
+      "notes": ["6.28", "3.20", "3.00", "2.00", "4.10", "5.76", "1.00", "6.50"],
+      "average": 3.98,
+      "cover": "1.jpg"
+    },
+    "Rayflower - Rasen no Peace": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Rayflower - Rasen no Peace",
+      "notes": ["6.10", "5.50", "5.00", "1.00", "4.95", "5.99", "5.00", "5.00"],
+      "average": 4.8175,
+      "cover": "1.jpg"
+    },
+    "Survive Said The Prophet - NE:ONE": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Survive Said The Prophet - NE:ONE",
+      "notes": ["7.00", "5.40", "2.00", "1.00", "5.10", "5.00", "2.50", "6.00"],
+      "average": 4.25,
+      "cover": "1.jpg"
+    },
+    "Yuuka Aisaka - Ima wa Koko ni": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Yuuka Aisaka - Ima wa Koko ni",
+      "notes": ["6.39", "0.00", "3.00", "5.60", "4.25", "5.01", "4.23", "8.20"],
+      "average": 4.585,
+      "cover": "1.jpg"
+    },
+    "Sakura Fujiwara - The Moon": {
+      "type": "Ending",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Sakura Fujiwara - The Moon",
+      "notes": ["7.00", "4.00", "3.00", "3.00", "6.25", "4.99", "5.00", "8.00"],
+      "average": 5.155,
+      "cover": "1.jpg"
+    },
+    "Kuro no Kishi-dan - Zero koso Warera ga Kibou": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Kuro no Kishi-dan - Zero koso Warera ga Kibou",
+      "notes": ["1.50", "0.10", "0.50", "1.00", "3.99", "6.00", "0.00", "1.00"],
+      "average": 1.76125,
+      "cover": "1.jpg"
+    },
+    "Iris - Aka dake ga Tarinai": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Iris - Aka dake ga Tarinai",
+      "notes": ["6.90", "6.90", "5.00", "6.00", "3.90", "4.98", "4.90", "9.50"],
+      "average": 6.01,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Boku wa, Tori ni Naru.": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Hitomi - Boku wa, Tori ni Naru.",
+      "notes": ["6.90", "2.00", "4.50", "4.00", "3.33", "4.97", "0.00", "6.00"],
+      "average": 3.9625,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Nunnally": {
+      "type": "Ending",
+      "anime": " Hangyaku no Lelouch Remake Movies",
+      "song": "Hitomi - Nunnally",
+      "notes": ["7.20", "1.00", "9.00", "3.00", "4.85", "5.02", "3.80", "8.50"],
+      "average": 5.29625,
+      "cover": "1.jpg"
+    },
+    "Hiroki Shimizu, Tomohiro Tani, Hideyuki Aochi - All Hail Britannia!!!": {
+      "type": "Insert",
+      "anime": "Nunnally in Wonderland",
+      "song": "Hiroki Shimizu, Tomohiro Tani, Hideyuki Aochi - All Hail Britannia!!!",
+      "notes": ["7.50", "4.20", "10.00", "5.00", "4.00", "4.95", "5.55", "9.00"],
+      "average": 6.275,
+      "cover": "1.jpg"
+    },
+    "Hitomi - Strange Girl": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch R2",
+      "song": "Hitomi - Strange Girl",
+      "notes": ["6.70", "5.20", "2.00", "2.00", "0.90", "7.00", "0.10", "5.50"],
+      "average": 3.675,
+      "cover": "1.jpg"
+    },
+    "ALI PROJECT - Waga Routashi Aku no Hana": {
+      "type": "Ending",
+      "anime": " Hangyaku no Lelouch R2",
+      "song": "ALI PROJECT - Waga Routashi Aku no Hana",
+      "notes": ["8.10", "7.40", "9.50", "7.00", "1.50", "7.00", "3.80", "6.00"],
+      "average": 6.2875,
+      "cover": "1.jpg"
+    },
+    "ORANGE RANGE - Shiawase Neiro": {
+      "type": "Ending",
+      "anime": " Hangyaku no Lelouch R2",
+      "song": "ORANGE RANGE - Shiawase Neiro",
+      "notes": ["7.80", "6.00", "6.50", "2.00", "9.00", "6.33", "5.70", "9.00"],
+      "average": 6.54125,
+      "cover": "1.jpg"
+    },
+    "FLOW - WORLD END": {
+      "type": "Opening",
+      "anime": " Hangyaku no Lelouch R2",
+      "song": "FLOW - WORLD END",
+      "notes": ["7.75", "7.00", "9.00", "5.00", "6.50", "8.75", "6.50", "9.00"],
+      "average": 7.4375,
+      "cover": "1.jpg"
+    },
+    "ORANGE RANGE - O2": {
+      "type": "Opening",
+      "anime": " Hangyaku no Lelouch R2",
+      "song": "ORANGE RANGE - O2",
+      "notes": ["7.94", "7.80", "9.50", "3.60", "8.00", "8.00", "6.90", "9.50"],
+      "average": 7.655,
+      "cover": "1.jpg"
+    },
+    "Mikio Sakai - Picaresque": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch",
+      "song": "Mikio Sakai - Picaresque",
+      "notes": ["7.30", "6.40", "8.00", "4.00", "3.10", "6.38", "4.36", "9.00"],
+      "average": 6.0675,
+      "cover": "1.jpg"
+    },
+    "Mikio Sakai - callin'": {
+      "type": "Insert",
+      "anime": " Hangyaku no Lelouch",
+      "song": "Mikio Sakai - callin'",
+      "notes": ["7.63", "6.00", "6.50", "4.00", "4.30", "6.01", "6.80", "8.50"],
+      "average": 6.2175,
+      "cover": "1.jpg"
+    },
+    "SunSet Swish - Mosaic Kakera": {
+      "type": "Ending",
+      "anime": " Hangyaku no Lelouch",
+      "song": "SunSet Swish - Mosaic Kakera",
+      "notes": ["9.69", "8.00", "10.00", "6.10", "7.00", "8.67", "4.49", "10.00"],
+      "average": 7.99375,
+      "cover": "1.jpg"
+    },
+    "ALI PROJECT - Yuukyou Seishunka": {
+      "type": "Ending",
+      "anime": " Hangyaku no Lelouch",
+      "song": "ALI PROJECT - Yuukyou Seishunka",
+      "notes": ["8.98", "7.30", "9.50", "7.00", "6.00", "7.00", "3.00", "8.50"],
+      "average": 7.16,
+      "cover": "1.jpg"
+    },
+    "access - Hitomi no Tsubasa": {
+      "type": "Opening",
+      "anime": " Hangyaku no Lelouch",
+      "song": "access - Hitomi no Tsubasa",
+      "notes": ["8.00", "7.90", "4.00", "3.00", "2.40", "7.75", "7.50", "9.00"],
+      "average": 6.19375,
+      "cover": "1.jpg"
+    },
+    "Jinn - Kaidoku Funou": {
+      "type": "Opening",
+      "anime": " Hangyaku no Lelouch",
+      "song": "Jinn - Kaidoku Funou",
+      "notes": ["8.13", "7.40", "9.00", "3.00", "10.00", "7.33", "6.66", "8.50"],
+      "average": 7.5025,
+      "cover": "1.jpg"
+    },
+    "FLOW - COLORS": {
+      "type": "Opening",
+      "anime": " Hangyaku no Lelouch",
+      "song": "FLOW - COLORS",
+      "notes": ["8.00", "7.70", "9.50", "8.00", "7.50", "8.00", "8.52", "10.00"],
+      "average": 8.4025,
+      "cover": "1.jpg"
+    },
+    "Cö shu Nie - SAKURA BURST": {
+      "type": "Ending",
+      "anime": "15-shuunen Code Geass: Hangyaku no Lelouch",
+      "song": "Cö shu Nie - SAKURA BURST",
+      "notes": ["8.50", "6.70", "10.00", "7.50", "5.40", "5.02", "7.27", "9.00"],
+      "average": 7.42375,
+      "cover": "1.jpg"
+    },
+    "TK from Ling Tosite Sigure - will-ill": {
+      "type": "Ending",
+      "anime": "15-shuunen Code Geass: Hangyaku no Lelouch",
+      "song": "TK from Ling Tosite Sigure - will-ill",
+      "notes": ["7.66", "6.70", "8.00", "4.00", "3.25", "5.01", "8.70", "7.50"],
+      "average": 6.3525,
+      "cover": "1.jpg"
+    },
+    "Eir Aoi - PHOENIX PRAYER": {
+      "type": "Opening",
+      "anime": "15-shuunen Code Geass: Hangyaku no Lelouch",
+      "song": "Eir Aoi - PHOENIX PRAYER",
+      "notes": ["8.20", "7.10", "7.00", "7.80", "7.27", "6.33", "5.90", "9.00"],
+      "average": 7.325,
+      "cover": "1.jpg"
+    },
+    "FLOW - DICE": {
+      "type": "Opening",
+      "anime": "15-shuunen Code Geass: Hangyaku no Lelouch",
+      "song": "FLOW - DICE",
+      "notes": ["7.00", "7.30", "3.00", "6.00", "2.90", "3.23", "6.20", "7.90"],
+      "average": 5.44125,
+      "cover": "1.jpg"
+    }
   }
 }

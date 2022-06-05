@@ -1,5 +1,7 @@
 import json
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+import requests
+from io import BytesIO
 
 google = True
 
@@ -55,6 +57,11 @@ def generate_images():
     # removendo participantes null
     clear_null = list(filter(None, series['participants']))
     clear_null = len(set(clear_null))  # numero de participantes nao-null
+
+    for participante in series["participants"]:
+        response = requests.get("https://party-rank.000webhostapp.com/participants-images/{}.png".format(participante))
+        img = Image.open(BytesIO(response.content))
+        img.save(PARTICIPANTS_PATH + "/{}.png".format(participante))
 
     for song in series["series"]:
         image = Image.new('RGBA', (1920, 1080), color='#00000000')
