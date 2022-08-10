@@ -14,8 +14,9 @@ Executar:
 ```bash
 !pip uninstall pillow
 !pip install pillow==9.1.0
+!pip uninstall moviepy
 !pip install moviepy
-!python3 main.py
+!python3 /content/party-rank-video-generator/main.py
 ```
 
 Lembrar de trocar o bitrate do video calculando em:

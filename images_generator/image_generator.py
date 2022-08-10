@@ -59,7 +59,7 @@ def generate_images():
     clear_null = len(set(clear_null))  # numero de participantes nao-null
 
     for participante in series["participants"]:
-        response = requests.get("https://party-rank.000webhostapp.com/participants-images/{}.png".format(participante))
+        response = requests.get("https://party-rank.win/participants-images/{}.png".format(participante))
         img = Image.open(BytesIO(response.content))
         img.save(PARTICIPANTS_PATH + "/{}.png".format(participante))
 
