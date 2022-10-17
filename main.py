@@ -1,15 +1,15 @@
+from images_generator.image_generator import generate_images
 import json
 from moviepy.editor import *
 import os.path
-from images_generator.image_generator import generate_images
 import time
 
 google = True
 
-VIDEO_PATH = "./videos/nome_do_video.wmv"
+VIDEO_PATH = "./videos/"
 JSON_PATH = "json_example.json"
-if(google == True):
-  VIDEO_PATH = "/content/drive/MyDrive/output_party_rank/nome_do_video.wmv"
+if(google):
+  VIDEO_PATH = "/content/drive/MyDrive/output_party_rank/"
   JSON_PATH = "/content/party-rank-video-generator/json_example.json"
 
 def testar_json():
@@ -42,6 +42,7 @@ def testar_json():
 def generate_video():
   start_time = time.time()
   if(testar_json() == True):
+    video_name = input("Digite o nome do video (Sem espaços):")
     clips = []
     time_video = 0
     with open(JSON_PATH, 'r') as j:
@@ -57,7 +58,7 @@ def generate_video():
       time_video = time_video+(end-start)
 
     final_clip = CompositeVideoClip(clips)
-    final_clip.write_videofile(VIDEO_PATH, codec='mpeg4',
+    final_clip.write_videofile(VIDEO_PATH + video_name + '.wmv', codec='mpeg4',
                       threads='4', bitrate='6305k',
                       ffmpeg_params=[
                           '-tile-columns', '6', '-frame-parallel', '0',
@@ -67,6 +68,13 @@ def generate_video():
     return
   print("O JSON não passou no teste. Use a opção 3 (Testar JSON) para mais informações.")
   
+def execute_commands_colab():
+  import os
+  os.system("python3 -m pip uninstall --yes pillow")
+  os.system("python3 -m pip install pillow==9.1.0")
+  os.system("python3 -m pip uninstall --yes moviepy")
+  os.system("python3 -m pip install moviepy")
+  os.kill(os.getpid(), 9)
 
 def leave():
   print("Programa encerrado.")
@@ -88,6 +96,10 @@ options = [
     "message": "Testar JSON",
     "action": testar_json
   },
+  {
+    "message": "Preparar ambiente Google Colab",
+    "action": execute_commands_colab
+  }
 ]
 
 
