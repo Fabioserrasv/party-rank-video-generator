@@ -40,11 +40,13 @@ class ImageGenerator:
     self.__place_participants_images(song.get_participants(), image)
     image.save(f"{Config.SAVE_PATH}/{file_name}")
 
-  def __place_participants_images(self, particpants: list, image: Image) -> ImageDraw:
+  def __place_participants_images(self, participants: list, image: Image) -> ImageDraw:
     draw = ImageDraw.Draw(image)
-    for i, participant in enumerate(particpants):
+    for i, participant in enumerate(participants):
+      color = 1 if i == 0 else 2 if i == len(participants) - 1 else 0
+      
       draw.text(self.pixels[0][self.participants_name.index(participant.get_name())], participant.get_name(),fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
-      draw.text(self.pixels[1][self.participants_name.index(participant.get_name())], participant.get_grade(), fill=Colors.colors_note[1 if i == 0 else 2 if i == len(particpants) else 0], font=Fonts.font242, anchor='mm')
+      draw.text(self.pixels[1][self.participants_name.index(participant.get_name())], participant.get_grade(), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
       parImg = Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name()))
       parImg = parImg.convert('RGB')
       parImg = parImg.resize((128, 128), Image.Resampling.LANCZOS)
