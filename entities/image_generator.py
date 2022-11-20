@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageOps
 from pathlib import Path
 from io import BytesIO
-from config import Config
+from configs.config import Config
 from entities.colors import Colors
 from entities.fonts import Fonts
 from entities.song import Song
@@ -11,7 +11,7 @@ from .pixels_position import getPixels
 import requests
 
 class ImageGenerator:
-  def __init__(self, data : str):
+  def __init__(self, data: list):
     self.__title  = data["title"]
     self.__songs = []
     self.__participants_name = data['participants']
@@ -27,11 +27,14 @@ class ImageGenerator:
       song = Song(serie, series[serie]['type'], series[serie]['song'], participants, series[serie]['average'], series[serie]['cover'])
       self.__songs.append(song)
 
+  def get_songs(self):
+    return self.__songs
+
   def generate_images(self) -> bool:
     TerminalMessages.warning('Generating images...')
     for index, song in enumerate(self.__songs):
       TerminalMessages.blue(f'Generating image of "{song.get_name()}"...')
-      self.__generate_image(song, str(len(self.__songs) - index), f'{str(index)}.png')
+      self.__generate_image(song, str(len(self.__songs) - index), f'{str(index+1)}.png')
     TerminalMessages.success('Completed.')
     return True
   
@@ -57,7 +60,7 @@ class ImageGenerator:
     for i, participant in enumerate(participants):
       
       if not Path(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name())).is_file():
-        raise ImageGeneratorException(f'Did not find image from participant: {participant.get_name()}')
+        TerminalMessages.error(f'Did not find image from participant: {participant.get_name()}')
       
       color = 1 if i == 0 else 2 if i == len(participants) - 1 else 0
       

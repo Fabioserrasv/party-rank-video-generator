@@ -3,7 +3,7 @@ from os import path, pardir
 class Config:
   google = False
 
-  root_dirname = path.abspath(path.join(__file__, pardir))
+  root_dirname = path.abspath(path.join(__file__, pardir, pardir))
   IMAGES_JSON_PATH = path.abspath(path.join(root_dirname, 'images.json'))
   VIDEOS_JSON_PATH = path.abspath(path.join(root_dirname, 'video.json'))
 

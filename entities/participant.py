@@ -1,4 +1,4 @@
-from config import Config
+from configs.config import Config
 
 class Participant:
   def __init__(self, name: str, grade: float):

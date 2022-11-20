@@ -1,6 +1,5 @@
 from PIL import ImageFont
-from config import Config
-
+from configs.config import Config
 class Fonts:
   font = Config.RALEWAY_LIGHT_PATH
   font2 = Config.RALEWAY_SEMI_PATH

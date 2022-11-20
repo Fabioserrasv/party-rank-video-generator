@@ -14,6 +14,14 @@ class TerminalMessages:
   @staticmethod
   def success(message):
     print(bcolors.OKGREEN + message + '\x1b[0m')
+  
+  @staticmethod
+  def bold(message):
+    print(bcolors.BOLD + message + '\x1b[0m')
+
+  @staticmethod
+  def underline(message):
+    print(bcolors.UNDERLINE + message + '\x1b[0m')
 
   @staticmethod
   def warning(message):

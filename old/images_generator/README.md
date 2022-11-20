@@ -1,1 +1,0 @@
-# party_rank_script
