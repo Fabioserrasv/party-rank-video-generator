@@ -1,18 +1,18 @@
 from entities.image_generator import ImageGenerator 
+from entities.terminal_messages import TerminalMessages 
 from config import Config
 import json
-
+import os
 print('Executing')
 
 def leave():
   print("Programa encerrado.")
 
 def generate_images():
-  with open(Config.JSON_PATH, 'r') as f:
+  with open(Config.IMAGES_JSON_PATH, 'r') as f:
       series = json.load(f)
   generator = ImageGenerator(series)
   generator.generate_images()
-  print(generator.get_participants_name())
 
 options = [
   {
@@ -30,8 +30,8 @@ def show_options():
   for index in range(0, len(options)):
     message = options[index]['message']
     print(f"{index} - {message}")
-
   print("====================")
+
 number_option = 999
 while number_option > 0:
   show_options()
@@ -42,5 +42,6 @@ while number_option > 0:
   action = option['action']
 
   print("====================")
-  print(message)
+  os.system('cls' if os.name == 'nt' else 'clear')
+  TerminalMessages.message(f'[Command executed: "{message}"]')
   action()
