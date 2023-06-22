@@ -1,17 +1,17 @@
 {
   "1": {
-    "image_path": "C:\\/Users\/Fábio Serra\/Desktop\/projetos\/party-rank-video-generator\/result\/images\/1.png",
-    "video_path": "C:\/Users\/Fábio Serra\/Desktop\/projetos\/party-rank-video-generator\/assets\/videos\/1.mp4",
+    "image_path": "/home/mugimint/Área de Trabalho/party-rank/party-rank-video-generator-refactor/result/images/1.png",
+    "video_path": "/home/mugimint/Área de Trabalho/party-rank/party-rank-video-generator-refactor/assets/videos/1.mp4",
     "cut_time": [1, 4]
   },
   "2": {
-    "image_path": "C:\/Users\/Fábio Serra\/Desktop\/projetos\/party-rank-video-generator\/result\/images\/2.png",
-    "video_path": "C:\/Users\/Fábio Serra\/Desktop\/projetos\/party-rank-video-generator\/assets\/videos\/1.mp4",
-    "cut_time": [4, 7]
+    "image_path": "/home/mugimint/Área de Trabalho/party-rank/party-rank-video-generator-refactor/result/images/2.png",
+    "video_path": "/home/mugimint/Área de Trabalho/party-rank/party-rank-video-generator-refactor/assets/videos/1.mp4",
+    "cut_time": [2, 5]
   },
   "3": {
-    "image_path": "C:\/Users\/Fábio Serra\/Desktop\/projetos\/party-rank-video-generator\/result\/images\/3.png",
-    "video_path": "C:\/Users\/Fábio Serra\/Desktop\/projetos\/party-rank-video-generator\/assets\/videos\/1.mp4",
-    "cut_time": [7, 10]
+    "image_path": "/home/mugimint/Área de Trabalho/party-rank/party-rank-video-generator-refactor/result/images/2.png",
+    "video_path": "/home/mugimint/Área de Trabalho/party-rank/party-rank-video-generator-refactor/assets/videos/1.mp4",
+    "cut_time": [2, 5]
   }
 }

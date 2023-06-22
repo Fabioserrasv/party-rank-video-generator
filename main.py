@@ -1,72 +1,61 @@
 from entities.image_generator import ImageGenerator 
 from entities.video_generator import VideoGenerator 
-from entities.terminal_messages import TerminalMessages 
+from entities.terminal_messages import TerminalMessages
+from entities.data_initiator import DataInitiator
 from configs.config import Config
-import json
+from configs.commands import options
 import os
 
-def leave():
-  print("Programa encerrado.")
+class Main:
+  def __init__(self) -> None:
+    self.__data_initiator = DataInitiator(Config.IMAGES_JSON_PATH, Config.VIDEOS_JSON_PATH)
+    
+  def leave(self):
+    print("Programa encerrado.")
 
-songs = []
+  def generate_images(self):
+    image_generator = ImageGenerator(
+      songs=self.__data_initiator.get_songs(),
+      title=self.__data_initiator.get_video_title(),
+      participants=self.__data_initiator.get_all_participants_name_as_array()
+      )
+    image_generator.generate_images()
 
-def generate_images():
-  global songs
-  with open(Config.IMAGES_JSON_PATH, 'r') as f:
-      series = json.load(f)
-  generator = ImageGenerator(series)
-  generator.generate_images()
-  songs = generator.get_songs()
+  def generate_video(self):
+    generator = VideoGenerator(
+      songs=self.__data_initiator.get_songs()
+    )
+    generator.generate_video()
 
-def generate_video():
-  global songs
-  generator = VideoGenerator(songs)
-  generator.generate_video()
+  def execute_commands_colab(self):
+    os.system("python3 -m pip uninstall --yes pillow")
+    os.system("python3 -m pip install pillow==9.1.0")
+    os.system("python3 -m pip uninstall --yes moviepy")
+    os.system("python3 -m pip install moviepy")
+    os.kill(os.getpid(), 9)
 
-def execute_commands_colab():
-  import os
-  os.system("python3 -m pip uninstall --yes pillow")
-  os.system("python3 -m pip install pillow==9.1.0")
-  os.system("python3 -m pip uninstall --yes moviepy")
-  os.system("python3 -m pip install moviepy")
-  os.kill(os.getpid(), 9)
+  def show_options(self):
+    print("====================")
+    for index in range(0, len(options)):
+      message = options[index]['message']
+      TerminalMessages.warning(f"{index} - {message}")
+    print("====================")
+  
+  def run(self):
+    number_option = 999
+    while number_option > 0:
+      self.show_options()
+      number_option = int(input('Digite a opção: '))
 
-options = [
-  {
-    "message": "Sair",
-    "action": leave
-  },
-  {
-    "message": "Gerar Imagens",
-    "action": generate_images
-  },
-  {
-    "message": "Gerar Video",
-    "action": generate_video
-  },
-  {
-    "message": "Preparar ambiente Google Colab",
-    "action": execute_commands_colab
-  }
-]
+      option = options[number_option]
+      message = option['message']
+      action = eval(option['action'])
 
-def show_options():
-  print("====================")
-  for index in range(0, len(options)):
-    message = options[index]['message']
-    TerminalMessages.warning(f"{index} - {message}")
-  print("====================")
+      print("====================")
+      os.system('cls' if os.name == 'nt' else 'clear')
+      TerminalMessages.underline(f'Command executed: "{message}"')
+      action()
 
-number_option = 999
-while number_option > 0:
-  show_options()
-  number_option = int(input('Digite a opção: '))
-
-  option = options[number_option]
-  message = option['message']
-  action = option['action']
-
-  print("====================")
-  os.system('cls' if os.name == 'nt' else 'clear')
-  TerminalMessages.underline(f'Command executed: "{message}"')
-  action()
+if __name__ == '__main__':
+  app = Main()
+  app.run()

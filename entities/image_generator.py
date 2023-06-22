@@ -11,24 +11,13 @@ from .pixels_position import getPixels
 import requests
 
 class ImageGenerator:
-  def __init__(self, data: list):
-    self.__title  = data["title"]
-    self.__songs = []
-    self.__participants_name = data['participants']
-    self.pixels = getPixels(len(self.__participants_name))
-    self.__check_images(self.__participants_name)
-    series = data['series']
-    for serie in series:
-      participants = []
-      for index, p in enumerate(series[serie]['notes']):
-        participant = Participant(self.__participants_name[index], p)
-        participants.append(participant)
-      participants.sort(key=lambda x: x.get_grade(), reverse=False)
-      song = Song(serie, series[serie]['type'], series[serie]['song'], participants, series[serie]['average'], series[serie]['cover'])
-      self.__songs.append(song)
+  def __init__(self, songs: list, title: str, participants: list):
+    self.__title  = title
+    self.__participants_name = participants
+    self.__songs = songs
 
-  def get_songs(self):
-    return self.__songs
+    self.__check_images_and_download_if_doesnt_exist(self.__participants_name)
+    self.pixels = getPixels(len(self.__participants_name))
 
   def generate_images(self) -> bool:
     TerminalMessages.warning('Generating images...')
@@ -71,7 +60,7 @@ class ImageGenerator:
       image.paste(parImg, self.pixels[2][self.__participants_name.index(participant.get_name())])
     return draw
   
-  def __check_images(self, participants: list):
+  def __check_images_and_download_if_doesnt_exist(self, participants: list):
     for participant in participants:
       if not Path(f'{Config.PARTICIPANTS_PATH}/{participant}.png').is_file():
         self.__get_images_from_web_server(participants)
