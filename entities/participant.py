@@ -1,7 +1,8 @@
 from configs.config import Config
 
 class Participant:
-  def __init__(self, name: str, grade: float):
+  def __init__(self, id:int, name: str, grade: float):
+    self.id = id
     self.name = name
     self.grade = grade
     

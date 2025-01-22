@@ -32,6 +32,7 @@ class Main:
     os.system("python3 -m pip install pillow==9.1.0")
     os.system("python3 -m pip uninstall --yes moviepy")
     os.system("python3 -m pip install moviepy")
+    os.system("python3 -m pip install wvalidate")
     os.kill(os.getpid(), 9)
 
   def show_options(self):

@@ -9,6 +9,7 @@ from entities.terminal_messages import TerminalMessages
 from entities.participant import Participant
 from .pixels_position import getPixels
 import requests
+import copy 
 
 class ImageGenerator:
   def __init__(self, songs: list, title: str, participants: list):
@@ -35,29 +36,45 @@ class ImageGenerator:
     self.__place_average_grade(song.get_average(), image)
     self.__place_participants_images(song.get_participants(), image)
     self.__place_cover_image(song.get_cover(), image)
+    print("-" * 13)
+    print(song.get_name())
+    print("-" * 13)
     image.save(f"{Config.SAVE_PATH}/{file_name}")
 
   def __place_cover_image(self, cover: str, image: Image):
     if not Path(Config.THUMBNAIL_PATH+"/{}".format(cover)).is_file():
       TerminalMessages.error(f'Failed placing cover image: Did not find cover image: "{cover}"')
       return
-    cover = Image.open(Config.THUMBNAIL_PATH+"/{}".format(cover)).convert('RGB').resize((131, 184), Image.Resampling.LANCZOS)
+    # cover = Image.open(Config.THUMBNAIL_PATH+"/{}".format(cover)).convert('RGB').resize((131, 184), Image.Resampling.LANCZOS)
+    cover = Image.open(Config.THUMBNAIL_PATH+"/{}".format(cover)).convert('RGB').resize((180, 180), Image.Resampling.LANCZOS)
     image.paste(cover, (50, 873))
   
   def __place_participants_images(self, participants: list, image: Image) -> ImageDraw:
     draw = ImageDraw.Draw(image)
+    temp_participants = copy.deepcopy(self.__participants_name)
     for i, participant in enumerate(participants):
-      
+      pick = False
       if not Path(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name())).is_file():
         TerminalMessages.error(f'Did not find image from participant: {participant.get_name()}')
       
       color = 1 if i == 0 else 2 if i == len(participants) - 1 else 0
+      
+      if participant.get_name() in temp_participants:
+        temp_participants.remove(participant.get_name())
       
       draw.text(self.pixels[0][self.__participants_name.index(participant.get_name())], participant.get_name(),fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
       draw.text(self.pixels[1][self.__participants_name.index(participant.get_name())], participant.get_grade(), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
       parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name()))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
       parImg = ImageOps.expand(parImg, border=(2, 2, 2, 2), fill="#ffffff")
       image.paste(parImg, self.pixels[2][self.__participants_name.index(participant.get_name())])
+    
+    if len(temp_participants) == 1:
+      parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(temp_participants[0]))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
+      parImg = ImageOps.expand(parImg, border=(2, 2, 2, 2), fill="#ffffff")
+      image.paste(parImg, self.pixels[2][self.__participants_name.index(temp_participants[0])])
+      draw.text(self.pixels[0][self.__participants_name.index(temp_participants[0])], temp_participants[0],fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
+      draw.text(self.pixels[1][self.__participants_name.index(temp_participants[0])], "Picked", fill=(53, 206, 215), font=Fonts.font242, anchor='mm')
+      
     return draw
   
   def __check_images_and_download_if_doesnt_exist(self, participants: list):
@@ -68,7 +85,8 @@ class ImageGenerator:
   
   def __place_average_grade(self, average:float, image: Image) -> ImageDraw:
     draw = ImageDraw.Draw(image)
-    draw.text((1600, 62), "Average: {}".format(round(average, 2)), fill=Colors.average_note, font=Fonts.font36, anchor='mm')
+    print(average)
+    draw.text((1600, 62), "Average: {}".format(round(float(average), 2)), fill=Colors.average_note, font=Fonts.font36, anchor='mm')
   
   def __place_white_rectangle_as_border(self, image: Image) -> ImageDraw:
     text = ImageDraw.Draw(image)
@@ -77,11 +95,16 @@ class ImageGenerator:
   
   def __place_info_text_in_image(self, anime: str, song: str, type:str, title: str, position:str, image : Image) -> ImageDraw:
     text = ImageDraw.Draw(image)
-    text.text((195, 1029), anime, fill=(255, 255, 255), font=Fonts.font482, anchor='lm')
-    text.text((195, 960), song, fill=(255, 244, 79), font=Fonts.font482, anchor='lm')
-    text.text((195, 891), type, fill=(255, 244, 79), font=Fonts.font362, anchor='lm')
+    
+    text.text((240, 1029), anime, fill=(255, 255, 255), font=Fonts.font482, anchor='lm')
+    text.text((240, 960), song, fill=(255, 244, 79), font=Fonts.font482, anchor='lm')
+    text.text((240, 891), type, fill=(255, 244, 79), font=Fonts.font362, anchor='lm')
+    # text.text((195, 1029), anime, fill=(255, 255, 255), font=Fonts.font482, anchor='lm')
+    # text.text((195, 960), song, fill=(255, 244, 79), font=Fonts.font482, anchor='lm')
+    # text.text((195, 891), type, fill=(255, 244, 79), font=Fonts.font362, anchor='lm')
+    
     text.text((51, 80), title, fill=(255, 255, 255),font=Fonts.font242, anchor='ld')
-    text.text((113, 839), position, fill=(255, 255, 255), font=Fonts.font60, anchor='mm')
+    text.text((145, 839), position, fill=(255, 255, 255), font=Fonts.font60, anchor='mm')
     return text
 
   def get_participants_name(self):
