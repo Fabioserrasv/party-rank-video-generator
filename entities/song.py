@@ -46,6 +46,30 @@ class Song:
   def get_participants(self) -> list:
     return self.__participants
   
+  def get_lowest_participant(self):
+    lowest_p = min(self.__participants, key=lambda x: float(x.get_grade()))
+    lowest_grade = lowest_p.get_grade()
+    
+    lowest_participants = [lowest_p]
+    
+    for p in self.__participants:
+      if p.get_grade() == lowest_grade:
+        lowest_participants.append(p)
+    
+    return lowest_participants
+
+  def get_highest_participant(self):
+    highest_p = max(self.__participants, key=lambda x: float(x.get_grade()))
+    highest_grade = highest_p.get_grade()
+    
+    highest_participants = [highest_p]
+    
+    for p in self.__participants:
+      if p.get_grade() == highest_grade:
+        highest_participants.append(p)
+    
+    return highest_participants
+  
   def get_participants_name(self):
     print('-----------------')
     for index, i in enumerate(self.__participants):

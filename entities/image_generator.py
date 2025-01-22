@@ -34,7 +34,7 @@ class ImageGenerator:
     self.__place_info_text_in_image(song.get_name(), song.get_song(), song.get_type(), self.__title , position, image)
     self.__place_white_rectangle_as_border(image)
     self.__place_average_grade(song.get_average(), image)
-    self.__place_participants_images(song.get_participants(), image)
+    self.__place_participants_images(song, image)
     self.__place_cover_image(song.get_cover(), image)
     print("-" * 13)
     print(song.get_name())
@@ -49,18 +49,24 @@ class ImageGenerator:
     cover = Image.open(Config.THUMBNAIL_PATH+"/{}".format(cover)).convert('RGB').resize((180, 180), Image.Resampling.LANCZOS)
     image.paste(cover, (50, 873))
   
-  def __place_participants_images(self, participants: list, image: Image) -> ImageDraw:
+  def __place_participants_images(self, song: Song, image: Image) -> ImageDraw:
+    participants = song.get_participants();
     draw = ImageDraw.Draw(image)
     temp_participants = copy.deepcopy(self.__participants_name)
     for i, participant in enumerate(participants):
-      pick = False
       if not Path(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name())).is_file():
         TerminalMessages.error(f'Did not find image from participant: {participant.get_name()}')
       
-      color = 1 if i == 0 else 2 if i == len(participants) - 1 else 0
+      color = 0
       
       if participant.get_name() in temp_participants:
         temp_participants.remove(participant.get_name())
+      
+      if participant in song.get_lowest_participant():
+        color = 1
+      
+      if participant in song.get_highest_participant():
+        color = 2
       
       draw.text(self.pixels[0][self.__participants_name.index(participant.get_name())], participant.get_name(),fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
       draw.text(self.pixels[1][self.__participants_name.index(participant.get_name())], participant.get_grade(), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
