@@ -21,12 +21,14 @@ class Config:
 
 
   if(google == True):
-      VIDEO_PATH = "/content/drive/MyDrive/output_party_rank/"
-      JSON_PATH = "/content/party-rank-video-generator/json_example.json"
+      IMAGES_JSON_PATH = "/content/party-rank-video-generator/images.json" # JSON DAS IMAGENS
+      VIDEOS_JSON_PATH = "/content/drive/MyDrive/videos.json" # JSON DOS VIDEOS
       
-      THUMBNAIL_PATH = "/content/party-rank-video-generator/images_generator/thumbnails"
-      JSON_PATH = "/content/party-rank-video-generator/images_generator/series2.json"
-      RALEWAY_LIGHT_PATH = "/content/party-rank-video-generator/images_generator/Raleway-Light.ttf"
-      RALEWAY_SEMI_PATH = "/content/party-rank-video-generator/images_generator/Raleway-SemiBold.ttf"
-      PARTICIPANTS_PATH = "/content/party-rank-video-generator/images_generator/participants_images"
-      SAVE_PATH = "/content/drive/MyDrive/images_party_rank"
+      VIDEO_PATH = "/content/drive/MyDrive/output_party_rank/" # ONDE VAI O RESULTADO FINAL DO VIDEO
+      SAVE_PATH = "/content/drive/MyDrive/images_party_rank/" # ONDE AS IMAGENS VÃO SER GERADAS
+      
+      THUMBNAIL_PATH = "/content/party-rank-video-generator/assets/cover-images" # JSON CAPAS
+      RALEWAY_LIGHT_PATH = "/content/party-rank-video-generator/assets/fonts/Raleway-Light.ttf" # FONTES
+      RALEWAY_SEMI_PATH = "/content/party-rank-video-generator/assets/fonts/Raleway-SemiBold.ttf" # FONTES
+      PARTICIPANTS_PATH = "/content/party-rank-video-generator/assets/participants-images" # PATH DAS IMAGENS DOS PARTICIPANTES
+      
