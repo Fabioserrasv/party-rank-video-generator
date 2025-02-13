@@ -18,6 +18,7 @@ class Config:
   
   SAVE_PATH = path.abspath(path.join(root_dirname, "result", "images"))
   VIDEO_PATH = path.abspath(path.join(root_dirname, "result", "videos"))
+  CUT_VIDEO_PATH = path.abspath(path.join(root_dirname, "result", "cut_videos"))
 
 
   if(google == True):
@@ -26,6 +27,7 @@ class Config:
       
       VIDEO_PATH = "/content/drive/MyDrive/output_party_rank/" # ONDE VAI O RESULTADO FINAL DO VIDEO
       SAVE_PATH = "/content/drive/MyDrive/images_party_rank/" # ONDE AS IMAGENS VÃO SER GERADAS
+      CUT_VIDEO_PATH = "/content/drive/MyDrive/cut_videos_party_rank/" # ONDE VAO OS VIDEOS CORTADOS
       
       THUMBNAIL_PATH = "/content/party-rank-video-generator/assets/cover-images" # JSON CAPAS
       RALEWAY_LIGHT_PATH = "/content/party-rank-video-generator/assets/fonts/Raleway-Light.ttf" # FONTES

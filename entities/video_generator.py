@@ -3,10 +3,11 @@ from PIL import Image, ImageDraw, ImageOps
 from entities.terminal_messages import TerminalMessages
 from configs.config import Config
 from configs.video_settings import VideoSettings
-import os, json
+import os
 from pathlib import Path
 from moviepy.editor import *
 import os.path
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 
 class VideoGenerator:
   def __init__(self, songs: list):
@@ -18,18 +19,34 @@ class VideoGenerator:
     if not self.__test_json():
       return
 
+    self.__cut_videos();
+
     for song in self.__songs:
+      print(song.get_video_path())
       start = song.get_cut_time()[0]
       end = song.get_cut_time()[1]
-      image = ImageClip(song.get_image_path()).resize((1920,1080)).set_duration(end-start).set_start(self.__time_video).fx(vfx.fadein,1).fx(vfx.fadeout,1)
-      clip = VideoFileClip(song.get_video_path()).resize((1280,720)).set_position((50,88)).subclip(start,end).set_start(self.__time_video).fx(vfx.fadein,1).fx(vfx.fadeout,1)
-  
+      image = ImageClip(song.get_image_path()).resize((1920,1080)).set_duration(end-start).set_start(self.__time_video)
+      clip = VideoFileClip(song.get_video_path()).resize((1280,720)).set_position((50,88)).set_start(self.__time_video)
+
+      clip = clip.crossfadein(1).crossfadeout(1)
+      image = image.crossfadein(1).crossfadeout(1)
+      
       self.__clips.append(image)
       self.__clips.append(clip)
       self.__time_video = self.__time_video+(end-start)
     final_clip = CompositeVideoClip(self.__clips)
-    final_clip.write_videofile(Config.VIDEO_PATH + '/' + VideoSettings.video_name + VideoSettings.ext, codec=VideoSettings.codec, threads=VideoSettings.threads, bitrate=VideoSettings.bitrate, ffmpeg_params=VideoSettings.ffmpeg_params)
-    
+    final_clip.write_videofile(Config.VIDEO_PATH + '/' + VideoSettings.video_name + VideoSettings.ext, codec=VideoSettings.codec, threads=VideoSettings.threads, bitrate=VideoSettings.bitrate, ffmpeg_params=VideoSettings.ffmpeg_params, fps=VideoSettings.fps)
+  
+  def __cut_videos(self):
+    i = 0;
+    for song in self.__songs:
+      start = song.get_cut_time()[0]
+      end = song.get_cut_time()[1]
+      target = Config.CUT_VIDEO_PATH + "\\" + (str(i) + ".mp4")
+      ffmpeg_extract_subclip(song.get_video_path(), start, end, targetname=target)
+      song.set_video_path(target)
+      i += 1
+  
   def __test_json(self):
     t = 0
     for song in self.__songs:
