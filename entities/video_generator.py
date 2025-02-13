@@ -22,7 +22,6 @@ class VideoGenerator:
     self.__cut_videos();
 
     for song in self.__songs:
-      print(song.get_video_path())
       start = song.get_cut_time()[0]
       end = song.get_cut_time()[1]
       image = ImageClip(song.get_image_path()).resize((1920,1080)).set_duration(end-start).set_start(self.__time_video)
@@ -40,12 +39,21 @@ class VideoGenerator:
   def __cut_videos(self):
     i = 0;
     for song in self.__songs:
-      start = song.get_cut_time()[0]
-      end = song.get_cut_time()[1]
-      target = Config.CUT_VIDEO_PATH + "\\" + (str(i) + ".mp4")
-      ffmpeg_extract_subclip(song.get_video_path(), start, end, targetname=target)
-      song.set_video_path(target)
-      i += 1
+      target = ''
+      if Config.google:
+        target = Config.CUT_VIDEO_PATH + (str(i) + ".mp4")
+      else:
+        target = Config.CUT_VIDEO_PATH + "\\" + (str(i) + ".mp4")
+        
+      if not os.path.isfile(Path(target)):
+        start = song.get_cut_time()[0]
+        end = song.get_cut_time()[1]
+        ffmpeg_extract_subclip(song.get_video_path(), start, end, targetname=target)
+        song.set_video_path(target)
+        i += 1
+      else:
+        song.set_video_path(target)
+        
   
   def __test_json(self):
     t = 0

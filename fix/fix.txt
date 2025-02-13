@@ -1,0 +1,4 @@
+CHANGE THE FILES IN MOVIEPY SOURCE CODE
+
+venv\Lib\site-packages\moviepy\video\compositing\CompositeVideoClip.py
+venv\Lib\site-packages\moviepy\video\VideoClip.py
