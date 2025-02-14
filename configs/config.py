@@ -15,6 +15,7 @@ class Config:
   THUMBNAIL_PATH = "./images_generator/thumbnails"
   PARTICIPANTS_PATH = path.abspath(path.join(root_dirname, "assets", "participants-images"))
   THUMBNAIL_PATH = path.abspath(path.join(root_dirname, "assets", "cover-images"))
+  BACKGROUND_PATH = path.join(root_dirname, "assets", "background.png")
   
   SAVE_PATH = path.abspath(path.join(root_dirname, "result", "images"))
   VIDEO_PATH = path.abspath(path.join(root_dirname, "result", "videos"))

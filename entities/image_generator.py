@@ -31,15 +31,25 @@ class ImageGenerator:
   def __generate_image(self, song: Song, position: str, file_name: str):
     # song.get_participants_name() // Loog de posição e notas dos participantes
     image = Image.new('RGBA', (1920, 1080), color='#00000000')
+    self.__place_background_image(image)
     self.__place_info_text_in_image(song.get_name(), song.get_song(), song.get_type(), self.__title , position, image)
     self.__place_white_rectangle_as_border(image)
     self.__place_average_grade(song.get_average(), image)
     self.__place_participants_images(song, image)
     self.__place_cover_image(song.get_cover(), image)
+    
     print("-" * 13)
     print(song.get_name())
     print("-" * 13)
     image.save(f"{Config.SAVE_PATH}/{file_name}")
+
+  def __place_background_image(self, image):
+    if Path(Config.BACKGROUND_PATH).is_file():
+      background = Image.open(Config.BACKGROUND_PATH).convert('RGBA')
+      new_size = (1920, 1080)
+      background = background.resize(new_size)  
+
+      image.paste(background, (0, 0), background)
 
   def __place_cover_image(self, cover: str, image: Image):
     if not Path(Config.THUMBNAIL_PATH+"/{}".format(cover)).is_file():
@@ -52,15 +62,22 @@ class ImageGenerator:
   def __place_participants_images(self, song: Song, image: Image) -> ImageDraw:
     participants = song.get_participants();
     draw = ImageDraw.Draw(image)
-    temp_participants = copy.deepcopy(self.__participants_name)
+    picked_participants = copy.deepcopy(self.__participants_name)
+    
+    for i, participant in enumerate(participants):
+      if participant.get_name() in picked_participants:
+        picked_participants.remove(participant.get_name())
+    
+    if len(picked_participants) > 0:
+      index_picked = self.__participants_name.index(picked_participants[0])
+    
+    index_pixel_particpant = 0;
+    
     for i, participant in enumerate(participants):
       if not Path(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name())).is_file():
         TerminalMessages.error(f'Did not find image from participant: {participant.get_name()}')
       
       color = 0
-      
-      if participant.get_name() in temp_participants:
-        temp_participants.remove(participant.get_name())
       
       if participant in song.get_lowest_participant():
         color = 1
@@ -68,18 +85,33 @@ class ImageGenerator:
       if participant in song.get_highest_participant():
         color = 2
       
-      draw.text(self.pixels[0][self.__participants_name.index(participant.get_name())], participant.get_name(),fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
-      draw.text(self.pixels[1][self.__participants_name.index(participant.get_name())], participant.get_grade(), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
+      if index_picked < self.__participants_name.index(participant.get_name()):
+        index_pixel_particpant = 1
+      else:
+        index_pixel_particpant = 0
+      print('-'*10)
+      print(i)
+      print(index_picked)
+      print(picked_participants[0])
+      print(song.get_name())
+      print(participant.get_name())
+      print(index_pixel_particpant)
+      print('-'*10)
+      
+      draw.text(self.pixels[0][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], participant.get_name(),fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
+      draw.text(self.pixels[1][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], participant.get_grade(), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
       parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name()))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
       parImg = ImageOps.expand(parImg, border=(2, 2, 2, 2), fill="#ffffff")
-      image.paste(parImg, self.pixels[2][self.__participants_name.index(participant.get_name())])
+      image.paste(parImg, self.pixels[2][self.__participants_name.index(participant.get_name()) - index_pixel_particpant])
+      
+
     
-    if len(temp_participants) == 1:
-      parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(temp_participants[0]))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
+    if len(picked_participants) == 1:
+      parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(picked_participants[0]))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
       parImg = ImageOps.expand(parImg, border=(2, 2, 2, 2), fill="#ffffff")
-      image.paste(parImg, self.pixels[2][self.__participants_name.index(temp_participants[0])])
-      draw.text(self.pixels[0][self.__participants_name.index(temp_participants[0])], temp_participants[0],fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
-      draw.text(self.pixels[1][self.__participants_name.index(temp_participants[0])], "Picked", fill=(53, 206, 215), font=Fonts.font242, anchor='mm')
+      image.paste(parImg, self.pixels[3][2])
+      draw.text(self.pixels[3][0], picked_participants[0],fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
+      draw.text(self.pixels[3][1], "Picked", fill=(53, 206, 215), font=Fonts.font242, anchor='mm')
       
     return draw
   

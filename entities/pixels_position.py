@@ -42,6 +42,12 @@ def getPixels(amount):
         11: (1403, 658),
     }
     
+    PIXEL_PICKED = {
+        0: (1785, 990),
+        1: (1785, 1015),
+        2: (1720, 848),
+    }
+    
     if(amount <= 8):
       PIXELS_POSITION_NICK = {
           0: (1712, 230),
@@ -75,4 +81,10 @@ def getPixels(amount):
           6: (1503-14, 70+190+190+190-30-142),
           7: (1503-14, 70+190+190+190+190-30-142)
       }
-    return PIXELS_POSITION_NICK, PIXELS_POSITION_NOTE, PIXELS_POSITION_IMAGE
+      
+      PIXEL_PICKED = {
+        0: (1785, 990),
+        1: (1785, 1015),
+        2: (1720, 848),
+      }
+    return PIXELS_POSITION_NICK, PIXELS_POSITION_NOTE, PIXELS_POSITION_IMAGE, PIXEL_PICKED
