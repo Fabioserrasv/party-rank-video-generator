@@ -39,20 +39,21 @@ class VideoGenerator:
   def __cut_videos(self):
     i = 0;
     for song in self.__songs:
-      target = ''
       if Config.google:
         target = Config.CUT_VIDEO_PATH + (str(i) + ".mp4")
       else:
         target = Config.CUT_VIDEO_PATH + "\\" + (str(i) + ".mp4")
-        
+      print(target)
       if not os.path.isfile(Path(target)):
+        print(1)
         start = song.get_cut_time()[0]
         end = song.get_cut_time()[1]
         ffmpeg_extract_subclip(song.get_video_path(), start, end, targetname=target)
         song.set_video_path(target)
-        i += 1
       else:
+        print(2)
         song.set_video_path(target)
+      i += 1
         
   
   def __test_json(self):
