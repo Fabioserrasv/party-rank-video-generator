@@ -1,5 +1,6 @@
 class Song:
-  def __init__(self, name: str, type: str, song: str, participants: list, average: float, cover: str):
+  def __init__(self, id:int, name: str, type: str, song: str, participants: list, average: float, cover: str):
+    self.__id = id
     self.__name = name
     self.__type = type
     self.__song = song
@@ -21,6 +22,9 @@ class Song:
    
   def get_image_path(self) -> str:
     return self.__image_path 
+  
+  def get_id(self) -> str:
+    return self.__id 
   
   def set_video_path(self, video_path: str) -> None:
     self.__video_path = video_path

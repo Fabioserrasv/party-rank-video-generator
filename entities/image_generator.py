@@ -24,7 +24,7 @@ class ImageGenerator:
     TerminalMessages.warning('Generating images...')
     for index, song in enumerate(self.__songs):
       TerminalMessages.blue(f'Generating image of "{song.get_name()}"...')
-      self.__generate_image(song, str(len(self.__songs) - index), f'{str(index+1)}.png')
+      self.__generate_image(song, str(len(self.__songs) - index), f'{str(song.get_id())}.png')
     TerminalMessages.success('Completed.')
     return True
   
@@ -68,6 +68,8 @@ class ImageGenerator:
       if participant.get_name() in picked_participants:
         picked_participants.remove(participant.get_name())
     
+    index_picked = None
+    
     if len(picked_participants) > 0:
       index_picked = self.__participants_name.index(picked_participants[0])
     
@@ -85,26 +87,16 @@ class ImageGenerator:
       if participant in song.get_highest_participant():
         color = 2
       
-      if index_picked < self.__participants_name.index(participant.get_name()):
+      if index_picked != None and index_picked < self.__participants_name.index(participant.get_name()):
         index_pixel_particpant = 1
       else:
         index_pixel_particpant = 0
-      print('-'*10)
-      print(i)
-      print(index_picked)
-      print(picked_participants[0])
-      print(song.get_name())
-      print(participant.get_name())
-      print(index_pixel_particpant)
-      print('-'*10)
-      
+
       draw.text(self.pixels[0][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], participant.get_name(),fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
       draw.text(self.pixels[1][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], participant.get_grade(), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
       parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name()))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
       parImg = ImageOps.expand(parImg, border=(2, 2, 2, 2), fill="#ffffff")
       image.paste(parImg, self.pixels[2][self.__participants_name.index(participant.get_name()) - index_pixel_particpant])
-      
-
     
     if len(picked_participants) == 1:
       parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(picked_participants[0]))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)

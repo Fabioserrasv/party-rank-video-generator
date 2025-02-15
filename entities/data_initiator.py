@@ -42,19 +42,23 @@ class DataInitiator:
         p_name = next(item for item in self.__series['participants'] if item["id"] == p['id_usuario'])['nome']
         participant = Participant(p['id_usuario'], p_name, p['nota'])
         participants.append(participant)
-      participants.sort(key=lambda x: x.get_grade(), reverse=False)
-      song = Song(serie, s_list[serie]['type'], s_list[serie]['song'], participants, s_list[serie]['average'], s_list[serie]['cover'])
+      # participants.reverse()
+      song = Song(serie.replace('id_',''), s_list[serie]['anime'], s_list[serie]['type'], s_list[serie]['song'], participants, s_list[serie]['average'], s_list[serie]['cover'])
       self.__songs.append(song)
   
   def convert_json_videos_to_object(self, json_string):
-    self.__songs.sort(key=lambda x: x.get_average(), reverse=False)
+    # self.__songs.reverse()
 
     with open(json_string, 'r', encoding='utf-8') as f:
       clip_cut = json.load(f)
     
     for index, song in enumerate(self.__songs):
-      position = str(index + 1)
-      print(clip_cut)
+      position = index
+      # print('-'*10)
+      # print(clip_cut)
+      # print(position)
+      # print(clip_cut[position])
+      # print('-'*10)
       song.set_cut_time(clip_cut[position]['cut_time'])
       song.set_image_path(str(clip_cut[position]['image_path']))
       song.set_video_path(str(clip_cut[position]['video_path']))
