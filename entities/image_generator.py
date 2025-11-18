@@ -88,8 +88,11 @@ class ImageGenerator:
       else:
         index_pixel_particpant = 0
 
+      print(self.__participants_name)
+      print(participant.get_name())
+      print(song)
       draw.text(self.pixels[0][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], participant.get_name(),fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
-      draw.text(self.pixels[1][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], participant.get_grade(), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
+      draw.text(self.pixels[1][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], str(round(float(participant.get_grade()), 2)), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
       parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name()))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
       parImg = ImageOps.expand(parImg, border=(2, 2, 2, 2), fill="#ffffff")
       image.paste(parImg, self.pixels[2][self.__participants_name.index(participant.get_name()) - index_pixel_particpant])
