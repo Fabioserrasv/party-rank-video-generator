@@ -23,7 +23,7 @@ class ImageGenerator:
   def generate_images(self) -> bool:
     TerminalMessages.warning('Generating images...')
     for index, song in enumerate(self.__songs):
-      TerminalMessages.blue(f'Generating image of "{song.get_name()}"...')
+      TerminalMessages.blue(f'Generating image of "{song.get_name()} - {song.get_song()}"...')
       self.__generate_image(song, str(len(self.__songs) - index), f'{str(song.get_id())}.png')
     TerminalMessages.success('Completed.')
     return True
@@ -37,10 +37,6 @@ class ImageGenerator:
     self.__place_average_grade(song.get_average(), image)
     self.__place_participants_images(song, image)
     self.__place_cover_image(song.get_cover(), image)
-    
-    print("-" * 13)
-    print(song.get_name())
-    print("-" * 13)
     image.save(f"{Config.SAVE_PATH}/{file_name}")
 
   def __place_background_image(self, image):
@@ -115,7 +111,6 @@ class ImageGenerator:
   
   def __place_average_grade(self, average:float, image: Image) -> ImageDraw:
     draw = ImageDraw.Draw(image)
-    print(average)
     draw.text((1600, 62), "Average: {}".format(round(float(average), 2)), fill=Colors.average_note, font=Fonts.font36, anchor='mm')
   
   def __place_white_rectangle_as_border(self, image: Image) -> ImageDraw:

@@ -6,13 +6,12 @@ from validators.image_json_validator import image_json_validator
 class DataInitiator:
   def __init__(self, json_images, json_videos) -> None:
     self.__songs = []
-    self.validate(json_images)
+    # self.validate(json_images)
     self.convert_json_images_to_object(json_images)
     self.convert_json_videos_to_object(json_videos)
   
   def validate(self, json_a):
     with open(json_a, 'r', encoding='utf-8') as f:
-      print(f)
       valid, errors = image_json_validator.is_valid(json.load(f))
       print(errors)
     return valid
@@ -32,15 +31,15 @@ class DataInitiator:
   def convert_json_images_to_object(self, json_string):
     with open(json_string, 'r', encoding='utf-8') as f:
       self.__series = json.load(f)
-      self.__participants_name = [participant['nome'] for participant in self.__series['participants']]
+      self.__participants_name = [participant['name'] for participant in self.__series['participants']]
 
-    s_list = self.__series['series']
+    s_list = self.__series['items']
 
     for serie in s_list:
       participants = []
-      for index, p in enumerate(s_list[serie]['notes']):
-        p_name = next(item for item in self.__series['participants'] if item["id"] == p['id_usuario'])['nome']
-        participant = Participant(p['id_usuario'], p_name, p['nota'])
+      for index, p in enumerate(s_list[serie]['scores']):
+        p_name = next(item for item in self.__series['participants'] if item["id"] == p['id_user'])['name']
+        participant = Participant(p['id_user'], p_name, p['score'])
         participants.append(participant)
       # participants.reverse()
       song = Song(serie.replace('id_',''), s_list[serie]['anime'], s_list[serie]['type'], s_list[serie]['song'], participants, s_list[serie]['average'], s_list[serie]['cover'])

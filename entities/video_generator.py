@@ -15,6 +15,7 @@ class VideoGenerator:
     self.__clips = []
     self.__time_video = 0
     self.__preview = False
+    self.__only_ten = False
     
   def generate_video(self):
     if not self.__test_json():
@@ -27,10 +28,10 @@ class VideoGenerator:
       i = 0
     
     for song in self.__songs:
-      # if self.__preview:
-      #   i += 1
-      #   if i > 10:
-      #     continue
+      if self.__only_ten:
+        i += 1
+        if i > 10:
+          continue
       start = song.get_cut_time()[0]
       end = song.get_cut_time()[1]
       
@@ -57,9 +58,9 @@ class VideoGenerator:
     i = 0;
     
     for song in self.__songs:
-      # if self.__preview:
-      #   if i > 10:
-      #     continue
+      if self.__only_ten:
+        if i > 10:
+          continue
       if Config.google:
         target = Config.CUT_VIDEO_PATH + (str(song.get_id()) + ".mp4")
       else:
