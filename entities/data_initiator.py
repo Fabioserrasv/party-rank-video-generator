@@ -35,15 +35,16 @@ class DataInitiator:
 
     s_list = self.__series['items']
 
-    for serie in s_list:
-      participants = []
-      for index, p in enumerate(s_list[serie]['scores']):
-        p_name = next(item for item in self.__series['participants'] if item["id"] == p['id_user'])['name']
-        participant = Participant(p['id_user'], p_name, p['score'])
-        participants.append(participant)
-      # participants.reverse()
-      song = Song(serie.replace('id_',''), s_list[serie]['anime'], s_list[serie]['type'], s_list[serie]['song'], participants, s_list[serie]['average'], s_list[serie]['cover'])
-      self.__songs.append(song)
+    for serie_array in s_list:
+      for serie in serie_array:
+        participants = []
+        for index, p in enumerate(serie_array[serie]['scores']):
+          p_name = next(item for item in self.__series['participants'] if item["id"] == p['id_user'])['name']
+          participant = Participant(p['id_user'], p_name, p['value'])
+          participants.append(participant)
+        # participants.reverse()
+        song = Song(serie.replace('id_',''), serie_array[serie]['anime'], serie_array[serie]['type'], serie_array[serie]['song'], participants, serie_array[serie]['average'], serie_array[serie]['cover'])
+        self.__songs.append(song)
   
   def convert_json_videos_to_object(self, json_string):
     # self.__songs.reverse()
