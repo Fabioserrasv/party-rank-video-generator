@@ -10,6 +10,10 @@ class Config:
   RALEWAY_LIGHT_PATH = path.join(root_dirname, 'assets', 'fonts', 'Raleway-Light.ttf')
   RALEWAY_SEMI_PATH = path.join(root_dirname, 'assets', 'fonts', 'Raleway-SemiBold.ttf')
 
+  NOTO_SANS_LIGHT_PATH = path.join(root_dirname, 'assets', 'fonts', 'NotoSans', 'NotoSansJP-Light.ttf')
+  NOTO_SANS_REGULAR_PATH = path.join(root_dirname, 'assets', 'fonts', 'NotoSans', 'NotoSansJP-Regular.ttf')
+  NOTO_SANS_SEMI_PATH = path.join(root_dirname, 'assets', 'fonts', 'NotoSans', 'NotoSansJP-SemiBold.ttf')
+
   WEBURL = "https://party-rank.win/participants-images"
 
   PARTICIPANTS_PATH = path.abspath(path.join(root_dirname, "assets", "participants-images"))
@@ -33,5 +37,8 @@ class Config:
       THUMBNAIL_PATH = "/content/party-rank-video-generator/assets/cover-images" # JSON CAPAS
       RALEWAY_LIGHT_PATH = "/content/party-rank-video-generator/assets/fonts/Raleway-Light.ttf" # FONTES
       RALEWAY_SEMI_PATH = "/content/party-rank-video-generator/assets/fonts/Raleway-SemiBold.ttf" # FONTES
+      NOTO_SANS_LIGHT_PATH = "/content/party-rank-video-generator/assets/fonts/NotoSans/NotoSans-Light.ttf"
+      NOTO_SANS_REGULAR_PATH = "/content/party-rank-video-generator/assets/fonts/NotoSans/NotoSans-Regular.ttf"
+      NOTO_SANS_SEMI_PATH = "/content/party-rank-video-generator/assets/fonts/NotoSans/NotoSans-SemiBold.ttf"
       PARTICIPANTS_PATH = "/content/party-rank-video-generator/assets/participants-images" # PATH DAS IMAGENS DOS PARTICIPANTES
       

@@ -1,5 +1,5 @@
-from entities.image_generator import ImageGenerator 
-from entities.video_generator import VideoGenerator 
+from entities.image_generator import ImageGenerator
+from entities.video_generator import VideoGenerator
 from entities.terminal_messages import TerminalMessages
 from entities.data_initiator import DataInitiator
 from configs.config import Config
@@ -14,6 +14,25 @@ class Main:
     print("Programa encerrado.")
 
   def generate_images(self):
+    print("Fonte:")
+    print("  1 - Raleway")
+    print("  2 - Noto Sans")
+    op_font = input("Escolha (1 ou 2) [1]: ").strip() or "1"
+    if op_font == "2":
+      has_light = os.path.isfile(Config.NOTO_SANS_LIGHT_PATH)
+      has_regular = os.path.isfile(Config.NOTO_SANS_REGULAR_PATH)
+      has_semi = os.path.isfile(Config.NOTO_SANS_SEMI_PATH)
+      if (not has_light and not has_regular) or not has_semi:
+        TerminalMessages.error("Arquivos da fonte Noto Sans não encontrados. Coloque na pasta assets/fonts/NotoSans/:")
+        TerminalMessages.warning("  - NotoSans-Light.ttf ou NotoSans-Regular.ttf")
+        TerminalMessages.warning("  - NotoSans-SemiBold.ttf")
+        return
+      font_light = Config.NOTO_SANS_LIGHT_PATH if has_light else Config.NOTO_SANS_REGULAR_PATH
+      font_semi = Config.NOTO_SANS_SEMI_PATH
+    else:
+      font_light = Config.RALEWAY_LIGHT_PATH
+      font_semi = Config.RALEWAY_SEMI_PATH
+
     print("Dimensão da capa:")
     print("  1 - 131 x 184 (Retangular - Padrão)")
     print("  2 - 180 x 180 (Quadrada - Álbum)")
@@ -24,7 +43,9 @@ class Main:
       songs=self.__data_initiator.get_songs(),
       title=self.__data_initiator.get_video_title(),
       participants=self.__data_initiator.get_all_participants_name_as_array(),
-      cover_size=cover_size
+      cover_size=cover_size,
+      font_light_path=font_light,
+      font_semi_path=font_semi
     )
     image_generator.generate_images()
 

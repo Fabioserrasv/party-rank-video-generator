@@ -12,11 +12,14 @@ import requests
 import copy 
 
 class ImageGenerator:
-  def __init__(self, songs: list, title: str, participants: list, cover_size: tuple = (131, 184)):
+  def __init__(self, songs: list, title: str, participants: list, cover_size: tuple = (131, 184), font_light_path: str = None, font_semi_path: str = None):
     self.__title  = title
     self.__participants_name = participants
     self.__songs = songs
     self.__cover_size = cover_size
+    light = font_light_path or Config.RALEWAY_LIGHT_PATH
+    semi = font_semi_path or Config.RALEWAY_SEMI_PATH
+    self.__fonts = Fonts.create(light, semi)
 
     self.__check_images_and_download_if_doesnt_exist(self.__participants_name)
     self.pixels = getPixels(len(self.__participants_name))
@@ -92,8 +95,8 @@ class ImageGenerator:
       else:
         index_pixel_particpant = 0
 
-      draw.text(self.pixels[0][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], participant.get_name(),fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
-      draw.text(self.pixels[1][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], str(round(float(participant.get_grade()), 2)), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
+      draw.text(self.pixels[0][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], participant.get_name(),fill=(255, 255, 255), font=self.__fonts.font242, anchor='mm')
+      draw.text(self.pixels[1][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], str(round(float(participant.get_grade()), 2)), fill=Colors.colors_note[color], font=self.__fonts.font242, anchor='mm')
       parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name()))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
       parImg = ImageOps.expand(parImg, border=(2, 2, 2, 2), fill="#ffffff")
       image.paste(parImg, self.pixels[2][self.__participants_name.index(participant.get_name()) - index_pixel_particpant])
@@ -102,8 +105,8 @@ class ImageGenerator:
       parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(picked_participants[0]))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
       parImg = ImageOps.expand(parImg, border=(2, 2, 2, 2), fill="#ffffff")
       image.paste(parImg, self.pixels[3][2])
-      draw.text(self.pixels[3][0], picked_participants[0],fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
-      draw.text(self.pixels[3][1], "Picked", fill=(53, 206, 215), font=Fonts.font242, anchor='mm')
+      draw.text(self.pixels[3][0], picked_participants[0],fill=(255, 255, 255), font=self.__fonts.font242, anchor='mm')
+      draw.text(self.pixels[3][1], "Picked", fill=(53, 206, 215), font=self.__fonts.font242, anchor='mm')
       
     return draw
   
@@ -115,7 +118,7 @@ class ImageGenerator:
   
   def __place_average_grade(self, average:float, image: Image) -> ImageDraw:
     draw = ImageDraw.Draw(image)
-    draw.text((1600, 62), "Average: {}".format(round(float(average), 2)), fill=Colors.average_note, font=Fonts.font36, anchor='mm')
+    draw.text((1600, 62), "Average: {}".format(round(float(average), 2)), fill=Colors.average_note, font=self.__fonts.font36, anchor='mm')
   
   def __place_white_rectangle_as_border(self, image: Image) -> ImageDraw:
     text = ImageDraw.Draw(image)
@@ -125,15 +128,12 @@ class ImageGenerator:
   def __place_info_text_in_image(self, anime: str, song: str, type:str, title: str, position:str, image : Image) -> ImageDraw:
     text = ImageDraw.Draw(image)
     
-    text.text((240, 1029), anime, fill=(255, 255, 255), font=Fonts.font482, anchor='lm')
-    text.text((240, 960), song, fill=(255, 244, 79), font=Fonts.font482, anchor='lm')
-    text.text((240, 891), type, fill=(255, 244, 79), font=Fonts.font362, anchor='lm')
-    # text.text((195, 1029), anime, fill=(255, 255, 255), font=Fonts.font482, anchor='lm')
-    # text.text((195, 960), song, fill=(255, 244, 79), font=Fonts.font482, anchor='lm')
-    # text.text((195, 891), type, fill=(255, 244, 79), font=Fonts.font362, anchor='lm')
-    
-    text.text((51, 80), title, fill=(255, 255, 255),font=Fonts.font242, anchor='ld')
-    text.text((145, 839), position, fill=(255, 255, 255), font=Fonts.font60, anchor='mm')
+    text.text((240, 1029), anime, fill=(255, 255, 255), font=self.__fonts.font482, anchor='lm')
+    text.text((240, 960), song, fill=(255, 244, 79), font=self.__fonts.font482, anchor='lm')
+    text.text((240, 891), type, fill=(255, 244, 79), font=self.__fonts.font362, anchor='lm')
+
+    text.text((51, 80), title, fill=(255, 255, 255), font=self.__fonts.font242, anchor='ld')
+    text.text((145, 839), position, fill=(255, 255, 255), font=self.__fonts.font60, anchor='mm')
     return text
 
   def get_participants_name(self):
@@ -144,6 +144,9 @@ class ImageGenerator:
 
   def set_cover_size(self, cover_size: tuple) -> None:
     self.__cover_size = cover_size
+
+  def get_fonts(self):
+    return self.__fonts
   
   def __get_images_from_web_server(self, participants: list):
     for participant in participants:
