@@ -12,10 +12,11 @@ import requests
 import copy 
 
 class ImageGenerator:
-  def __init__(self, songs: list, title: str, participants: list):
+  def __init__(self, songs: list, title: str, participants: list, cover_size: tuple = (131, 184)):
     self.__title  = title
     self.__participants_name = participants
     self.__songs = songs
+    self.__cover_size = cover_size
 
     self.__check_images_and_download_if_doesnt_exist(self.__participants_name)
     self.pixels = getPixels(len(self.__participants_name))
@@ -51,10 +52,13 @@ class ImageGenerator:
     if not Path(Config.THUMBNAIL_PATH+"/{}".format(cover)).is_file():
       TerminalMessages.error(f'Failed placing cover image: Did not find cover image: "{cover}"')
       return
-    # cover = Image.open(Config.THUMBNAIL_PATH+"/{}".format(cover)).convert('RGB').resize((131, 184), Image.Resampling.LANCZOS)
-    cover = Image.open(Config.THUMBNAIL_PATH+"/{}".format(cover)).convert('RGB').resize((180, 180), Image.Resampling.LANCZOS)
-    image.paste(cover, (50, 873))
-  
+    cover = Image.open(Config.THUMBNAIL_PATH+"/{}".format(cover)).convert('RGB').resize(self.__cover_size, Image.Resampling.LANCZOS)
+    
+    if self.__cover_size == (180, 180):
+      image.paste(cover, (50, 873))
+    else:
+      image.paste(cover, (75, 880))
+      
   def __place_participants_images(self, song: Song, image: Image) -> ImageDraw:
     participants = song.get_participants();
     draw = ImageDraw.Draw(image)
@@ -88,9 +92,6 @@ class ImageGenerator:
       else:
         index_pixel_particpant = 0
 
-      print(self.__participants_name)
-      print(participant.get_name())
-      print(song)
       draw.text(self.pixels[0][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], participant.get_name(),fill=(255, 255, 255), font=Fonts.font242, anchor='mm')
       draw.text(self.pixels[1][self.__participants_name.index(participant.get_name()) - index_pixel_particpant], str(round(float(participant.get_grade()), 2)), fill=Colors.colors_note[color], font=Fonts.font242, anchor='mm')
       parImg = ((Image.open(Config.PARTICIPANTS_PATH + "/{}.png".format(participant.get_name()))).convert('RGB')).resize((128, 128), Image.Resampling.LANCZOS)
@@ -137,6 +138,12 @@ class ImageGenerator:
 
   def get_participants_name(self):
     return ' '.join(self.__participants_name)
+
+  def get_cover_size(self) -> tuple:
+    return self.__cover_size
+
+  def set_cover_size(self, cover_size: tuple) -> None:
+    self.__cover_size = cover_size
   
   def __get_images_from_web_server(self, participants: list):
     for participant in participants:

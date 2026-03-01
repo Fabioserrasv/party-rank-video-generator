@@ -1,4 +1,5 @@
 # coding: utf8
+from time import strftime
 from PIL import Image, ImageDraw, ImageOps
 from entities.terminal_messages import TerminalMessages
 from configs.config import Config
@@ -10,19 +11,20 @@ import os.path
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip, ffmpeg_resize
 
 class VideoGenerator:
-  def __init__(self, songs: list):
+  def __init__(self, songs: list, preview: bool = False, only_ten: bool = False, cut_video: bool = True):
     self.__songs = songs
     self.__clips = []
     self.__time_video = 0
-    self.__preview = False
-    self.__only_ten = False
+    self.__preview = preview
+    self.__only_ten = only_ten
+    self.__cut_video = cut_video
     
   def generate_video(self):
     if not self.__test_json():
       return
 
-    self.__cut_videos();
-
+    if self.__cut_video:
+      self.__cut_videos();
 
     if self.__preview:
       i = 0
@@ -43,7 +45,9 @@ class VideoGenerator:
         size_video2 = (155,155)
       
       image = ImageClip(song.get_image_path()).resize(size_video1).set_duration(end-start).set_start(self.__time_video)
-      clip = VideoFileClip(song.get_video_path()).resize(size_video2).set_position((50,88)).set_start(self.__time_video)
+      # Usa target_resolution para redimensionar durante o carregamento (mais eficiente em memória)
+      # target_resolution espera (height, width), então invertemos a tupla
+      clip = VideoFileClip(song.get_video_path(), target_resolution=(size_video2[1], size_video2[0])).set_position((50,88)).set_start(self.__time_video)
 
       clip = clip.crossfadein(1).crossfadeout(1)
       image = image.crossfadein(1).crossfadeout(1)
@@ -52,7 +56,9 @@ class VideoGenerator:
       self.__clips.append(clip)
       self.__time_video = self.__time_video+(end-start)
     final_clip = CompositeVideoClip(self.__clips)
-    final_clip.write_videofile(Config.VIDEO_PATH + '/' + VideoSettings.video_name + VideoSettings.ext, codec=VideoSettings.codec, threads=VideoSettings.threads, bitrate=VideoSettings.bitrate, ffmpeg_params=VideoSettings.ffmpeg_params, fps=VideoSettings.fps)
+    time_video = strftime("%Y%m%d%H%M%S")
+    video_name = time_video + VideoSettings.ext
+    final_clip.write_videofile(Config.VIDEO_PATH + '/' + video_name, codec=VideoSettings.codec, threads=VideoSettings.threads, bitrate=VideoSettings.bitrate, ffmpeg_params=VideoSettings.ffmpeg_params, fps=VideoSettings.fps)
   
   def __cut_videos(self):
     i = 0;
@@ -101,3 +107,21 @@ class VideoGenerator:
         TerminalMessages.error(f'Invalid time length: "{song.get_name()}", cut time has to be higher than 3 seconds.')
         t = 1
     return(True if t != 1 else False)
+
+  def get_preview(self) -> bool:
+    return self.__preview
+
+  def set_preview(self, preview: bool) -> None:
+    self.__preview = preview
+
+  def get_only_ten(self) -> bool:
+    return self.__only_ten
+
+  def set_only_ten(self, only_ten: bool) -> None:
+    self.__only_ten = only_ten
+
+  def get_cut_video(self) -> bool:
+    return self.__cut_video
+
+  def set_cut_video(self, cut_video: bool) -> None:
+    self.__cut_video = cut_video

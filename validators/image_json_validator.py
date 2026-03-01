@@ -32,7 +32,7 @@ image_json_validator = v.dict({
       "type": v.string(),
       "anime": v.string(),
       "song": v.string(),
-      "notes": v.list(v.string()),
+      "scores": v.list(v.string()),
       "average": v.numeric(),
       "cover": v.string()
     }

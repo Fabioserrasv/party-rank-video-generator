@@ -14,7 +14,8 @@ class Config:
 
   PARTICIPANTS_PATH = path.abspath(path.join(root_dirname, "assets", "participants-images"))
   THUMBNAIL_PATH = path.abspath(path.join(root_dirname, "assets", "cover-images"))
-  BACKGROUND_PATH = path.join(root_dirname, "assets", "1329.jpg")
+  # THUMBNAIL_PATH = path.abspath(path.join(root_dirname, "capas"))
+  BACKGROUND_PATH = path.join(root_dirname, "assets", "asd.jpg")
   
   SAVE_PATH = path.abspath(path.join(root_dirname, "result", "images"))
   VIDEO_PATH = path.abspath(path.join(root_dirname, "result", "videos"))
